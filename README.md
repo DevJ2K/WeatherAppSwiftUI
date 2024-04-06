@@ -8,3 +8,4 @@
 - Launch Screen
 - Loading when fetching some stuff
 - Remove print in console
+- 3D Models to see the weather
