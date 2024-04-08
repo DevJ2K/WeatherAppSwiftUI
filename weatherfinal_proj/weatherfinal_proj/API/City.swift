@@ -161,7 +161,7 @@ func fetchCityInfo(city: City) async -> CityInfo? {
 func fetchCity(name: String) async -> [City] {
     //    print("0")
     DispatchQueue.main.async {
-        LocationManager.shared.isFetchingCity = true
+        LocationManager.shared.isFetchingCityList = true
     }
     let urlString = "https://geocoding-api.open-meteo.com/v1/search?name=\(name)&count=5&language=en&format=json"
     print(urlString)
@@ -169,7 +169,7 @@ func fetchCity(name: String) async -> [City] {
     guard let url = URL(string: urlString) else {
         print("This request has failed please try with an other URL...")
         DispatchQueue.main.async {
-            LocationManager.shared.isFetchingCity = false
+            LocationManager.shared.isFetchingCityList = false
         }
         return []
     }
@@ -180,7 +180,7 @@ func fetchCity(name: String) async -> [City] {
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             print("Invalid status code != 200")
-            LocationManager.shared.isFetchingCity = false
+            LocationManager.shared.isFetchingCityList = false
             return []
         }
         //        print("2")
@@ -189,13 +189,13 @@ func fetchCity(name: String) async -> [City] {
         //        print("3")
         //        print(decodedResponse.results)
         DispatchQueue.main.async {
-            LocationManager.shared.isFetchingCity = false
+            LocationManager.shared.isFetchingCityList = false
         }
         return decodedResponse.results
     } catch {
         print("Failed to fetch the data : \(error)")
         DispatchQueue.main.async {
-            LocationManager.shared.isFetchingCity = false
+            LocationManager.shared.isFetchingCityList = false
         }
         return []
     }

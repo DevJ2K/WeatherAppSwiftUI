@@ -193,8 +193,10 @@ struct ContentView: View {
                                 locationManager.cityLocation = city
                                 if (locationManager.cityLocation != nil) {
                                     Task {
+                                        locationManager.isFetchingCityInfo = true
                                         let cityInfoFetching = await fetchCityInfo(city: locationManager.cityLocation!)
                                         locationManager.cityInfo = cityInfoFetching
+                                        locationManager.isFetchingCityInfo = false
                                     }
                                     
                                 } else {
@@ -222,86 +224,108 @@ struct ContentView: View {
                 })
             } else {
                 TabView(selection: $selectedTab) {
-                    if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
-                        CurrentlyView(cityInfo: locationManager.cityInfo)
-                            .navigationTitle("Currently")
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "sun.min")
-                                    Text("Currently")
-                                    
+                    
+                    if (locationManager.isFetchingCityInfo == false) {
+                        if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
+                            CurrentlyView(cityInfo: locationManager.cityInfo)
+                                .navigationTitle("Currently")
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "sun.min")
+                                        Text("Currently")
+                                        
+                                    }
                                 }
-                            }
-                            .tag(Tab.currently)
-                    } else {
-                        if (locationManager.cityLocation == nil) {
-                            Text("Geolocation is not available, please enable it in your App settings.")
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .tag(Tab.currently)
-                        } else if (locationManager.cityInfo == nil) {
-                            Text("The service connection is lost, please check your internet connection or try again later")
-                                .multilineTextAlignment(.center)
-                                .padding()
                                 .tag(Tab.currently)
                         } else {
-                            Text("Internal error, please try again.")
-                                .multilineTextAlignment(.center)
-                                .tag(Tab.currently)
-                        }
-                    }
-                    if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
-                        TodayView(cityInfo: locationManager.cityInfo)
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "calendar.day.timeline.left")
-                                    Text("Today")
-                                }
+                            if (locationManager.cityLocation == nil) {
+                                Text("Geolocation is not available, please enable it in your App settings.")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .tag(Tab.currently)
+                            } else if (locationManager.cityInfo == nil) {
+                                Text("The service connection is lost, please check your internet connection or try again later")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .tag(Tab.currently)
+                            } else {
+                                Text("Internal error, please try again.")
+                                    .multilineTextAlignment(.center)
+                                    .tag(Tab.currently)
                             }
-                            .tag(Tab.today)
+                        }
                     } else {
-                        if (locationManager.cityLocation == nil) {
-                            Text("Geolocation is not available, please enable it in your App settings.")
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .tag(Tab.today)
-                        } else if (locationManager.cityInfo == nil) {
-                            Text("The service connection is lost, please check your internet connection or try again later")
-                                .multilineTextAlignment(.center)
-                                .padding()
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
+                    
+                    
+                    if (locationManager.isFetchingCityInfo == false) {
+                        if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
+                            TodayView(cityInfo: locationManager.cityInfo)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "calendar.day.timeline.left")
+                                        Text("Today")
+                                    }
+                                }
                                 .tag(Tab.today)
                         } else {
-                            Text("Internal error, please try again.")
-                                .multilineTextAlignment(.center)
-                                .tag(Tab.today)
-                        }
-                    }
-                    if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
-                        WeeklyView(cityInfo: locationManager.cityInfo)
-                            .tabItem {
-                                VStack {
-                                    Image(systemName: "calendar")
-                                    Text("Weekly")
-                                }
+                            if (locationManager.cityLocation == nil) {
+                                Text("Geolocation is not available, please enable it in your App settings.")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .tag(Tab.today)
+                            } else if (locationManager.cityInfo == nil) {
+                                Text("The service connection is lost, please check your internet connection or try again later")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .tag(Tab.today)
+                            } else {
+                                Text("Internal error, please try again.")
+                                    .multilineTextAlignment(.center)
+                                    .tag(Tab.today)
                             }
-                            .tag(Tab.weekly)
+                        }
                     } else {
-                        if (locationManager.cityLocation == nil) {
-                            Text("Geolocation is not available, please enable it in your App settings.")
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .tag(Tab.weekly)
-                        } else if (locationManager.cityInfo == nil) {
-                            Text("The service connection is lost, please check your internet connection or try again later")
-                                .multilineTextAlignment(.center)
-                                .padding()
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
+                    
+                    
+                    if (locationManager.isFetchingCityInfo == false) {
+                        if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
+                            WeeklyView(cityInfo: locationManager.cityInfo)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "calendar")
+                                        Text("Weekly")
+                                    }
+                                }
                                 .tag(Tab.weekly)
                         } else {
-                            Text("Internal error, please try again.")
-                                .multilineTextAlignment(.center)
-                                .tag(Tab.weekly)
+                            if (locationManager.cityLocation == nil) {
+                                Text("Geolocation is not available, please enable it in your App settings.")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .tag(Tab.weekly)
+                            } else if (locationManager.cityInfo == nil) {
+                                Text("The service connection is lost, please check your internet connection or try again later")
+                                    .multilineTextAlignment(.center)
+                                    .padding()
+                                    .tag(Tab.weekly)
+                            } else {
+                                Text("Internal error, please try again.")
+                                    .multilineTextAlignment(.center)
+                                    .tag(Tab.weekly)
+                            }
                         }
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(.circular)
                     }
+                    
+                    
                 }
                 .animation(nil, value: selectedTab)
                 .searchable(text: $searchText)
@@ -310,8 +334,6 @@ struct ContentView: View {
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
-            
-            //            MyAppBar(selectedTab: $selectedTab)
         }
         .padding(.bottom, 20)
         .background(showSearchBar ?
@@ -322,6 +344,8 @@ struct ContentView: View {
         .ignoresSafeArea(edges: .bottom)
     }
 }
+
+
 
 #Preview {
     ContentView()

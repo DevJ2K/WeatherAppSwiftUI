@@ -14,7 +14,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var cityLocation: City?
     @Published var cityInfo: CityInfo?
     
-    @Published var isFetchingCity = false
+    @Published var isFetchingCityList = false
+    
+    @Published var isFetchingCityInfo = false
+    
     private var userLocStatus: CLAuthorizationStatus?
     
     static let shared = LocationManager()
@@ -108,6 +111,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        DispatchQueue.main.async {
+            self.isFetchingCityInfo = true
+        }
         print("STARTING FILL USER LOCATION !")
         guard let latestLocation = locations.first else { return }
         locationManager.stopUpdatingLocation()
@@ -140,8 +146,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     let fetchedCityInfo = await fetchCityInfo(city: self.cityLocation!)
                     DispatchQueue.main.async {
                         self.cityInfo = fetchedCityInfo
-                        print(self.cityLocation ?? "cityLocation nil")
-                        print(self.cityInfo ?? "cityInfo nil")
+                        self.isFetchingCityInfo = false
+//                        print(self.cityLocation ?? "cityLocation nil")
+//                        print(self.cityInfo ?? "cityInfo nil")
                     }
                 }
                 print("========================================")
