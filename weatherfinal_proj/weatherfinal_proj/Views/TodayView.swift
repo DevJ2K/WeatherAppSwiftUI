@@ -44,7 +44,6 @@ struct TodayView: View {
             }
             .padding()
         }
-//        .background(.red)
     }
 }
 

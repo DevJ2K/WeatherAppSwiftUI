@@ -42,6 +42,8 @@ struct CurrentData: Codable {
     var temperature_2m: Double
     var is_day: Int8
     var weather_code: Int8
+    var relative_humidity_2m: Int8?
+    var precipitation_probability: Int8?
     var wind_speed_10m: Double
 }
 
@@ -129,7 +131,7 @@ func fetchCityInfo(city: City) async -> CityInfo? {
     //        return nil
     //    }
     var cityInfo = CityInfo(city: city)
-    var urlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&current=temperature_2m,is_day,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min"
+    var urlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&current=temperature_2m,relative_humidity_2m,precipitation_probability,is_day,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min"
     if (city.timezone != nil) {
         urlString += "&timezone=\(city.timezone!)"
     }

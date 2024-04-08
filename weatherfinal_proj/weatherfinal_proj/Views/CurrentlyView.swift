@@ -12,32 +12,38 @@ struct CurrentlyView: View {
     
     var body: some View {
         VStack {
-            Text("Currently")
-                .font(.title)
+            Spacer()
+            Text(cityInfo?.city?.name ?? "Unknown")
                 .bold()
-            if (cityInfo?.city != nil && cityInfo?.current != nil) {
+                .font(.largeTitle)
             
-                Text(cityInfo?.city?.name ?? "Unknown")
-                    .font(.title2)
+            HStack {
                 Text(cityInfo?.city?.admin1 ?? "Unknown")
-                    .font(.title2)
-                Text(cityInfo?.city?.country ?? "Unknown")
-                    .font(.title2)
-                Text("\(cityInfo?.city?.latitude ?? 0) | \(cityInfo?.city?.longitude ?? 0)")
+                    .font(.title3)
+                + Text(", ")
+                    .font(.title3)
+                + Text(cityInfo?.city?.country ?? "Unknown")
+                    .font(.title3)
+            }
+            CustomSceneView(sceneName: "cloudy_night.scn")
+                .frame(height: 350)
+            VStack(spacing: 0) {
                 if (cityInfo?.current?.temperature_2m != nil) {
-                    Text("\(String(format: "%.1f", cityInfo!.current!.temperature_2m))°C")
+                    Text("\(String(format: "%.1f", cityInfo!.current!.temperature_2m))°")
+                        .font(.system(size: 72, design: .serif))
+                        .fontWeight(.bold)
                 }
                 if (cityInfo?.current?.weather_code != nil) {
                     Text("\(getWeatherDescription(weather_code: cityInfo!.current!.weather_code)?.dayDescription ?? "")")
                 }
-                if (cityInfo?.current?.wind_speed_10m != nil) {
-                    Text("\(String(format: "%.1f", cityInfo!.current!.wind_speed_10m))km/h")
-                }
-            } else {
-                Text("Invalid data")
             }
             
+            CurrentInfoDash(wind_speed: cityInfo?.current?.wind_speed_10m, humidity: cityInfo?.current?.relative_humidity_2m, precipitation_probability: cityInfo?.current?.precipitation_probability)
+            
+            Spacer()
         }
+        .background(LinearGradient(colors: [Color.indigo.opacity(0.2), Color.indigo.opacity(0.6)], startPoint: .top, endPoint: .bottom))
+        .ignoresSafeArea(.all)
     }
 }
 
@@ -58,6 +64,8 @@ struct CurrentlyView: View {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
                 "is_day": 1,
+                "relative_humidity_2m": 43,
+                "precipitation_probability": 74,
                 "weather_code": 80,
                 "wind_speed_10m": 18.9
             },

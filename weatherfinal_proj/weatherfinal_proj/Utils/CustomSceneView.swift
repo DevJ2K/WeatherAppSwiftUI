@@ -11,20 +11,22 @@ import SceneKit
 struct CustomSceneView: UIViewRepresentable {
 //    @Binding var scene: SCNScene?
     let sceneName: String
+    let toBloomModel = ["crescent_moon", "stars_001", "stars_002", "stars_003", "stars_004", "moon_night"]
     
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
-        view.allowsCameraControl = true
+//        view.allowsCameraControl = true
         view.autoenablesDefaultLighting = true
         view.antialiasingMode = .multisampling2X
         view.scene = .init(named: sceneName)
-                view.backgroundColor = .clear
+        view.backgroundColor = .clear
         
         // Apply fade in effect
         view.scene?.rootNode.opacity = 0
-        let fadeInAction = SCNAction.fadeIn(duration: 3.5)
+        let fadeInAction = SCNAction.fadeIn(duration: 1.5)
         view.scene?.rootNode.runAction(fadeInAction)
 
+//        view.pointOfView?.position.y -= 0.1
 
         
         //        let cameraNode = SCNNode()
@@ -39,12 +41,16 @@ struct CustomSceneView: UIViewRepresentable {
         //        SCNTransaction.animationDuration = 5
         // Perform the initial scaling
 //        print(scene?.rootNode.name ?? "HERE")
+        for model in toBloomModel {
+            view.scene?.rootNode.childNode(withName: model, recursively: true)?.filters = addBloom()
+        }
         if let node = view.scene?.rootNode.childNode(withName: "Cylinder_039", recursively: true) {
             node.scale = SCNVector3(1, 1, 1)
             // Start loop animation
 //            startLoopAnimation(node)
         }
         
+        view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true)?.filters = addBloom()
         view.scene?.rootNode.childNode(withName: "Sphere_001", recursively: true)?.filters = addBloom()
         
         //        cameraNode.position = SCNVector3(0, -1.05, 0)
@@ -77,7 +83,7 @@ struct CustomSceneView: UIViewRepresentable {
     func addBloom() -> [CIFilter]? {
         let bloomFilter = CIFilter(name:"CIBloom")!
         bloomFilter.setValue(0.5, forKey: "inputIntensity")
-        bloomFilter.setValue(20.0, forKey: "inputRadius")
+        bloomFilter.setValue(10.0, forKey: "inputRadius")
 
         return [bloomFilter]
     }
@@ -126,7 +132,7 @@ struct CustomSceneView: UIViewRepresentable {
     do {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
-        return TodayView(cityInfo: cityInfo)
+        return CurrentlyView(cityInfo: cityInfo)
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)
