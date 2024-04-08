@@ -72,7 +72,7 @@ struct ContentView: View {
                 HStack {
                     if (showSearchBar) { // The search bar
                         Image(systemName: "magnifyingglass")
-                        TextField("Search", text: $searchText)
+                        TextField("Search location", text: $searchText)
                             .focused($focusedSearch, equals: true)
                             .onSubmit {
                                 hideKeyboard()
