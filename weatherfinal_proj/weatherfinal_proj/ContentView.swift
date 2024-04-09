@@ -152,8 +152,14 @@ struct ContentView: View {
                     }
                 }
                 .padding(showSearchBar ? 10 : 0)
-                .background(.thinMaterial)
-                .cornerRadius(20)
+                //                .background(Color.white.opacity(0.1))
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white.opacity(0.1))
+                        .shadow(color: .black, radius: 6, x: 2, y: 2)
+                    
+                )
+                //                .cornerRadius(20)
             }
             .padding(.top, 15)
             .padding(.horizontal)
@@ -329,12 +335,11 @@ struct ContentView: View {
                 }
                 .animation(nil, value: selectedTab)
                 .searchable(text: $searchText)
-                .overlay(alignment: .bottom) {
-                    MyAppBar(selectedTab: $selectedTab)
-                }
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                MyAppBar(selectedTab: $selectedTab)
             }
         }
+        .preferredColorScheme(.dark)
         .padding(.bottom, 20)
         .background(showSearchBar ?
                     LinearGradient(colors: [colorScheme == .dark ? .black : .white], startPoint: .center, endPoint: .center) :

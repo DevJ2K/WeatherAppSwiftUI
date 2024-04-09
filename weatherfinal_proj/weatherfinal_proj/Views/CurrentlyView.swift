@@ -12,11 +12,10 @@ struct CurrentlyView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+//            Spacer()
             Text(cityInfo?.city?.name ?? "Unknown")
                 .bold()
                 .font(.largeTitle)
-            
             HStack {
                 Text(cityInfo?.city?.admin1 ?? "Unknown")
                     .font(.title3)
@@ -25,29 +24,38 @@ struct CurrentlyView: View {
                 + Text(cityInfo?.city?.country ?? "Unknown")
                     .font(.title3)
             }
-            CustomSceneView(sceneName: "cloudy_night.scn")
-                .frame(height: 350)
-            VStack(spacing: 0) {
-                if (cityInfo?.current?.temperature_2m != nil) {
-                    Text("\(String(format: "%.1f", cityInfo!.current!.temperature_2m))°")
-                        .font(.system(size: 72, design: .serif))
-                        .fontWeight(.bold)
+//            Spacer()
+//            VStack(spacing: 0) {
+                
+                CustomSceneView(sceneName: "cloudy_night.scn")
+                    .frame(height: 200)
+                VStack(spacing: 6) {
+                    if (cityInfo?.current?.temperature_2m != nil) {
+                        Text("\(String(format: "%.f", cityInfo!.current!.temperature_2m))°")
+                            .font(.system(size: 72))
+                            .fontWeight(.bold)
+                            .frame(height: 56)
+//                            .background(.red)
+                    }
+                    if (cityInfo?.current?.weather_code != nil) {
+                        Text("\(getWeatherDescription(weather_code: cityInfo!.current!.weather_code)?.dayDescription ?? "")")
+                            .font(.system(size: 18))
+                            .fontWeight(.medium)
+                    }
                 }
-                if (cityInfo?.current?.weather_code != nil) {
-                    Text("\(getWeatherDescription(weather_code: cityInfo!.current!.weather_code)?.dayDescription ?? "")")
-                }
-            }
+//            }
             
             CurrentInfoDash(wind_speed: cityInfo?.current?.wind_speed_10m, humidity: cityInfo?.current?.relative_humidity_2m, precipitation_probability: cityInfo?.current?.precipitation_probability)
             
-            Spacer()
+//            Spacer()
         }
-        .background(LinearGradient(colors: [Color.indigo.opacity(0.2), Color.indigo.opacity(0.6)], startPoint: .top, endPoint: .bottom))
+//        .background(LinearGradient(colors: [Color.indigo.opacity(0.2), Color.indigo.opacity(0.6)], startPoint: .top, endPoint: .bottom))
         .ignoresSafeArea(.all)
     }
 }
 
 #Preview {
+    return ContentView()
     let jsonString = """
         {
             "city": {

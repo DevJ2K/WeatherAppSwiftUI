@@ -27,7 +27,22 @@ struct CustomSceneView: UIViewRepresentable {
         view.scene?.rootNode.runAction(fadeInAction)
 
 //        view.pointOfView?.position.y -= 0.1
+//        view.pointOfView = view.scene?.rootNode.childNode(withName: "camera", recursively: true)
 
+        
+        
+//        // Access the scene
+//        if let scene = view.scene {
+//            // Find the camera node named "camera"
+//            if let cameraNode = scene.rootNode.childNode(withName: "camera", recursively: true) {
+//                // Set the point of view to the camera node
+//                view.pointOfView = cameraNode
+//            } else {
+//                print("Camera node not found in the scene.")
+//            }
+//        } else {
+//            print("Scene not found in the scene view.")
+//        }
         
         //        let cameraNode = SCNNode()
         //        cameraNode.camera = SCNCamera()
