@@ -28,7 +28,7 @@ struct CurrentlyView: View {
 //            VStack(spacing: 0) {
                 
                 CustomSceneView(sceneName: "cloudy_night.scn")
-                    .frame(height: 200)
+                    .frame(height: 300)
                 VStack(spacing: 6) {
                     if (cityInfo?.current?.temperature_2m != nil) {
                         Text("\(String(format: "%.f", cityInfo!.current!.temperature_2m))°")

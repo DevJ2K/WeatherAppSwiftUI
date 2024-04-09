@@ -15,13 +15,15 @@ struct CurrentInfoDash: View {
     var body: some View {
         HStack(alignment: .center) {
             Spacer()
-            VStack(spacing: 10) {
+            VStack(spacing: 8) {
                 
                 HStack(spacing: 4) {
                     Image(systemName: "wind")
                         .font(.system(size: 14))
+                        .opacity(0.8)
                     Text("Wind")
                         .font(.system(size: 13, weight: .light))
+                        .opacity(0.8)
                 }
 //                .background(.blue)
                 if (wind_speed != nil) {
@@ -38,21 +40,23 @@ struct CurrentInfoDash: View {
             Divider()
                 .background(.white.opacity(0.8))
                 .padding(.vertical)
-            VStack(spacing: 6) {
+            VStack(spacing: 8) {
                 
                 HStack(spacing: 4) {
                     Image(systemName: "humidity")
-                        .font(.system(size: 12))
+                        .font(.system(size: 14))
+                        .opacity(0.8)
                     Text("Humidity")
-                        .font(.system(size: 12))
+                        .font(.system(size: 13, weight: .light))
                         .opacity(0.8)
                 }
 //                .background(.blue)
                 if (humidity != nil) {
                     Text("\(humidity!)%")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
                 } else {
                     Text("???")
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
                 }
             }
             .frame(maxWidth: .infinity)
@@ -61,20 +65,22 @@ struct CurrentInfoDash: View {
             Divider()
                 .background(.white.opacity(0.8))
                 .padding(.vertical)
-            VStack(spacing: 6) {
+            VStack(spacing: 8) {
                 HStack(spacing: 4) {
                     Image(systemName: "cloud.rain")
-                        .font(.system(size: 12))
+                        .font(.system(size: 14))
+                        .opacity(0.8)
                     Text("Rain")
-                        .font(.system(size: 12))
+                        .font(.system(size: 13, weight: .light))
                         .opacity(0.8)
                 }
 //                .background(.blue)
                 if (precipitation_probability != nil) {
                     Text("\(precipitation_probability!)%")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
                 } else {
                     Text("???")
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
                 }
             }
             .frame(maxWidth: .infinity)

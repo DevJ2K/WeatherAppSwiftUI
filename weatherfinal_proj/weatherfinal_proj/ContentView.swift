@@ -341,11 +341,16 @@ struct ContentView: View {
         }
         .preferredColorScheme(.dark)
         .padding(.bottom, 20)
+//        .background(
+//        Image("bg_image")
+//            .resizable()
+//        )
+//        .ignoresSafeArea(.all)
         .background(showSearchBar ?
                     LinearGradient(colors: [colorScheme == .dark ? .black : .white], startPoint: .center, endPoint: .center) :
                         LinearGradient(
                             gradient: Gradient(colors: [.purple.opacity(colorScheme == .dark ? 0.2 : 0.7), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
-        //        .ignoresSafeArea(edges: searchBarNoAnimation ? [] : .bottom)
+                .ignoresSafeArea(edges: searchBarNoAnimation ? [] : .bottom)
         .ignoresSafeArea(edges: .bottom)
     }
 }
