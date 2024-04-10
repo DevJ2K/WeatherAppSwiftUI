@@ -32,12 +32,11 @@ func convertToHours(timeString: String) -> Date {
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-//    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     
-    print(timeString)
+//    print(timeString)
     let date = dateFormatter.date(from: timeString)!
-    print(date)
-    print("++++")
+//    print(date)
+//    print("++++")
     return date
 }
 
@@ -66,26 +65,17 @@ struct TodayCharts: View {
             Text("Today temperatures")
             Chart {
                 ForEach(chartsData, id: \.id) { chartHour in
-                    
-                    //                RuleMark(y: .value("Average", hourly!.temperature_2m.reduce(0, { $0 + Int($1) }) / hourly!.temperature_2m.count))
-                    //                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                    //                    .foregroundStyle(.red)
-                    //                    .annotation(alignment: .leading) {
-                    //                        Text("Average")
-                    //                            .font(.caption)
-                    ////                            .foregroundStyle(.)
-                    //                    }
                     LineMark(
 //                        x: .value("Hour", "\(chartHour.time.suffix(5))"),
                         x: .value("Hour", chartHour.timeDate, unit: .hour),
                         y: .value("Temperature", chartHour.temperature)
                     )
                     .foregroundStyle(Color.blue.gradient)
-                    //                .symbol {
-                    //                    Circle()
-                    //                        .fill(.indigo)
-                    //                        .frame(width: 10)
-                    //                }
+//                                    .symbol {
+//                                        Circle()
+//                                            .fill(.indigo)
+//                                            .frame(width: 5)
+//                                    }
                     PointMark(
 //                        x: .value("Hour", "\(chartHour.time.suffix(5))"),
                         x: .value("Hour", chartHour.timeDate, unit: .hour),
@@ -98,12 +88,34 @@ struct TodayCharts: View {
             .frame(height: 300)
             .padding()
             .chartXAxis {
-                AxisMarks()
+                AxisMarks(values: .automatic(desiredCount: 8)) { axisValue in
+                    if let date = axisValue.as(Date.self) {
+                        AxisValueLabel() {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "HH:mm"
+                            let formattedDate = formatter.string(from: date)
+                            return Text("\(formattedDate)")
+//                                .foregroundColor(Color.white)
+                                .font(.system(size: 8))
+                        }
+                    }
+                    AxisGridLine(centered: false, stroke: StrokeStyle(lineWidth: 0.5, dash: [2]))
+                }
+                
             }
             .chartYAxis {
-                AxisMarks(position: .leading)
+                AxisMarks(position: .leading, values: .automatic(desiredCount: 8)) { value in
+                    AxisValueLabel {
+                        if let _temperature = value.as(Double.self) {
+                            Text("\(_temperature.formatted())°C")
+                        }
+                    }
+                    
+//                    AxisTick(stroke: StrokeStyle(lineWidth: 2))
+                    
+                    AxisGridLine(centered: false, stroke: StrokeStyle(lineWidth: 0.5, dash: [5]))
+                }
             }
-            .chartXScale(domain: .automatic)
             //        .chartPlotStyle { plotContent in
             //                plotContent
             //                .background(.mint.gradient.opacity(0.1))
