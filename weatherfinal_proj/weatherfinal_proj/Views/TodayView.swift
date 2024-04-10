@@ -62,7 +62,7 @@ struct TodayView: View {
 }
 
 #Preview {
-    return ContentView()
+//    return ContentView()
     let jsonString = """
         {
             "city": {
