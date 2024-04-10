@@ -11,43 +11,58 @@ struct TodayView: View {
     var cityInfo: CityInfo?
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .center) {
-                Text("Today")
-                    .font(.title)
-                    .bold()
-                if (cityInfo?.city != nil && cityInfo?.current != nil) {
-                    Text(cityInfo?.city?.name ?? "Unknown")
-                        .font(.title2)
-                    Text(cityInfo?.city?.admin1 ?? "Unknown")
-                        .font(.title2)
-                    Text(cityInfo?.city?.country ?? "Unknown")
-                        .font(.title2)
-                    Text("\(cityInfo?.city?.latitude ?? 0) | \(cityInfo?.city?.longitude ?? 0)")
-                    if (cityInfo?.hourly != nil) {
-                        ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
-                            HStack {
-                                Text("\(cityInfo!.hourly!.time[i].suffix(5))")
-                                Spacer()
-                                Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°C")
-                                Spacer()
-                                Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
-                                Spacer()
-                                Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
-                            }
-                            //                        Text("\(value)")
-                        }
-                    }
-                } else {
-                    Text("Invalid data")
-                }
+        VStack {
+            Text(cityInfo?.city?.name ?? "Unknown")
+                .bold()
+                .font(.largeTitle)
+            HStack {
+                Text(cityInfo?.city?.admin1 ?? "Unknown")
+                    .font(.title3)
+                + Text(", ")
+                    .font(.title3)
+                + Text(cityInfo?.city?.country ?? "Unknown")
+                    .font(.title3)
             }
-            .padding()
+            TodayCharts(hourly: cityInfo?.hourly)
         }
+//        ScrollView {
+//            VStack(alignment: .center) {
+//                Text("Today")
+//                    .font(.title)
+//                    .bold()
+//                if (cityInfo?.city != nil && cityInfo?.current != nil) {
+//                    Text(cityInfo?.city?.name ?? "Unknown")
+//                        .font(.title2)
+//                    Text(cityInfo?.city?.admin1 ?? "Unknown")
+//                        .font(.title2)
+//                    Text(cityInfo?.city?.country ?? "Unknown")
+//                        .font(.title2)
+//                    Text("\(cityInfo?.city?.latitude ?? 0) | \(cityInfo?.city?.longitude ?? 0)")
+//                    if (cityInfo?.hourly != nil) {
+//                        ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
+//                            HStack {
+//                                Text("\(cityInfo!.hourly!.time[i].suffix(5))")
+//                                Spacer()
+//                                Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°C")
+//                                Spacer()
+//                                Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
+//                                Spacer()
+//                                Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
+//                            }
+//                            //                        Text("\(value)")
+//                        }
+//                    }
+//                } else {
+//                    Text("Invalid data")
+//                }
+//            }
+//            .padding()
+//        }
     }
 }
 
 #Preview {
+    return ContentView()
     let jsonString = """
         {
             "city": {
@@ -90,6 +105,8 @@ struct TodayView: View {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
         return TodayView(cityInfo: cityInfo)
+            .background(LinearGradient(
+                gradient: Gradient(colors: [.purple.opacity(0.2), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)

@@ -31,7 +31,7 @@ struct CurrentlyView: View {
                     .frame(height: 300)
                 VStack(spacing: 6) {
                     if (cityInfo?.current?.temperature_2m != nil) {
-                        Text("\(String(format: "%.f", cityInfo!.current!.temperature_2m))°")
+                        Text("\(String(format: "%.0f", cityInfo!.current!.temperature_2m))°")
                             .font(.system(size: 72))
                             .fontWeight(.bold)
                             .frame(height: 56)
