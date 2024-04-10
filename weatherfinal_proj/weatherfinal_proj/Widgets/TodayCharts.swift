@@ -88,17 +88,25 @@ struct TodayCharts: View {
             .frame(height: 300)
             .padding()
             .chartXAxis {
-                AxisMarks(values: .automatic(desiredCount: 8)) { axisValue in
+                AxisMarks(preset: .aligned, values: .stride(by: .hour, count: 3)) { axisValue in
                     if let date = axisValue.as(Date.self) {
                         AxisValueLabel() {
                             let formatter = DateFormatter()
                             formatter.dateFormat = "HH:mm"
+                            formatter.locale = Locale(identifier: "en_US_POSIX")
+                            formatter.timeZone = TimeZone(secondsFromGMT: 0)
                             let formattedDate = formatter.string(from: date)
+                            print(axisValue.index)
+                            if (axisValue.index == 8) {
+                                return Text("")
+                                    .font(.system(size: 8))
+                            }
                             return Text("\(formattedDate)")
 //                                .foregroundColor(Color.white)
                                 .font(.system(size: 8))
                         }
                     }
+                    AxisTick(stroke: StrokeStyle(lineWidth: 0))
                     AxisGridLine(centered: false, stroke: StrokeStyle(lineWidth: 0.5, dash: [2]))
                 }
                 
@@ -111,15 +119,11 @@ struct TodayCharts: View {
                         }
                     }
                     
-//                    AxisTick(stroke: StrokeStyle(lineWidth: 2))
+                    AxisTick(stroke: StrokeStyle(lineWidth: 0))
                     
                     AxisGridLine(centered: false, stroke: StrokeStyle(lineWidth: 0.5, dash: [5]))
                 }
             }
-            //        .chartPlotStyle { plotContent in
-            //                plotContent
-            //                .background(.mint.gradient.opacity(0.1))
-            //        }
         }
         .padding()
         .background(.ultraThinMaterial)
