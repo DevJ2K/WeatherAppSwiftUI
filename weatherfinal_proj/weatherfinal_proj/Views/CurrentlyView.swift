@@ -11,21 +11,8 @@ struct CurrentlyView: View {
     var cityInfo: CityInfo?
     
     var body: some View {
-        VStack {
-//            Spacer()
-            Text(cityInfo?.city?.name ?? "Unknown")
-                .bold()
-                .font(.largeTitle)
-            HStack {
-                Text(cityInfo?.city?.admin1 ?? "Unknown")
-                    .font(.title3)
-                + Text(", ")
-                    .font(.title3)
-                + Text(cityInfo?.city?.country ?? "Unknown")
-                    .font(.title3)
-            }
-//            Spacer()
-//            VStack(spacing: 0) {
+        ScrollView {
+            VStack {
                 
                 CustomSceneView(sceneName: "cloudy_night.scn")
                     .frame(height: 300)
@@ -35,7 +22,7 @@ struct CurrentlyView: View {
                             .font(.system(size: 72))
                             .fontWeight(.bold)
                             .frame(height: 56)
-//                            .background(.red)
+                        //                            .background(.red)
                     }
                     if (cityInfo?.current?.weather_code != nil) {
                         Text("\(getWeatherDescription(weather_code: cityInfo!.current!.weather_code)?.dayDescription ?? "")")
@@ -43,14 +30,15 @@ struct CurrentlyView: View {
                             .fontWeight(.medium)
                     }
                 }
-//            }
-            
-            CurrentInfoDash(wind_speed: cityInfo?.current?.wind_speed_10m, humidity: cityInfo?.current?.relative_humidity_2m, precipitation_probability: cityInfo?.current?.precipitation_probability)
-            
-//            Spacer()
+                //            }
+                
+                CurrentInfoDash(wind_speed: cityInfo?.current?.wind_speed_10m, humidity: cityInfo?.current?.relative_humidity_2m, precipitation_probability: cityInfo?.current?.precipitation_probability)
+                
+                //            Spacer()
+            }
+            //        .background(LinearGradient(colors: [Color.indigo.opacity(0.2), Color.indigo.opacity(0.6)], startPoint: .top, endPoint: .bottom))
+            .ignoresSafeArea(.all)
         }
-//        .background(LinearGradient(colors: [Color.indigo.opacity(0.2), Color.indigo.opacity(0.6)], startPoint: .top, endPoint: .bottom))
-        .ignoresSafeArea(.all)
     }
 }
 

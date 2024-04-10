@@ -229,6 +229,24 @@ struct ContentView: View {
                     }
                 })
             } else {
+                
+                if (locationManager.cityInfo != nil) {
+                    VStack {
+                        Text(locationManager.cityInfo?.city?.name ?? "Unknown")
+                            .bold()
+                            .font(.title)
+                        HStack {
+                            Text(locationManager.cityInfo?.city?.admin1 ?? "Unknown")
+                                .font(.title3)
+                            + Text(", ")
+                                .font(.title3)
+                            + Text(locationManager.cityInfo?.city?.country ?? "Unknown")
+                                .font(.title3)
+                        }
+                        Text("")
+                    }
+//                    .padding()
+                }
                 TabView(selection: $selectedTab) {
                     
                     if (locationManager.isFetchingCityInfo == false) {

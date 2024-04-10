@@ -100,7 +100,6 @@
 				E45D44062BC448E700F43519 /* Widgets */,
 				E45D43EB2BC4353300F43519 /* 3D_Objects */,
 				E43155882BBB5B02005EFA4D /* API */,
-				E42784742BBB21450095FB12 /* LocationManager.swift */,
 				E481A9B12BB6DDD3005C6DD0 /* Utils */,
 				E481A9B02BB6DDCC005C6DD0 /* Views */,
 				E42AA0E42BB6DC6D0091B4C5 /* weatherfinal_projApp.swift */,
@@ -122,6 +121,7 @@
 		E43155882BBB5B02005EFA4D /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E42784742BBB21450095FB12 /* LocationManager.swift */,
 				E43155892BBB5B17005EFA4D /* City.swift */,
 			);
 			path = API;

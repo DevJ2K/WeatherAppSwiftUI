@@ -88,8 +88,7 @@ struct TodayCharts: View {
                 }
                 
             }
-            .frame(height: 300)
-            .padding()
+            .frame(height: 250)
             .chartXAxis {
                 AxisMarks(preset: .aligned, values: .stride(by: .hour, count: 3)) { axisValue in
                     if let date = axisValue.as(Date.self) {
@@ -127,8 +126,8 @@ struct TodayCharts: View {
                     AxisGridLine(centered: false, stroke: StrokeStyle(lineWidth: 0.5, dash: [5]))
                 }
             }
+            .padding()
         }
-//        .padding()
         .background(Color.black.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding()
