@@ -1,76 +1,57 @@
 //
-//  TodayView.swift
-//  weatherAppV2proj
+//  MiniSceneView.swift
+//  weatherfinal_proj
 //
-//  Created by Théo Ajavon on 29/03/2024.
+//  Created by Théo Ajavon on 11/04/2024.
 //
 
 import SwiftUI
+import SceneKit
 
-struct TodayView: View {
-    var cityInfo: CityInfo?
+struct MiniSceneView: UIViewRepresentable {
+//    @Binding var scene: SCNScene?
+    let sceneName: String
+    let toBloomModel = ["crescent_moon", "stars_001", "stars_002", "stars_003", "stars_004", "moon_night"]
     
-    var body: some View {
-        ScrollView {
-            VStack {
-                TodayCharts(hourly: cityInfo?.hourly)
-                ScrollViewContent()
-            }
+    func makeUIView(context: Context) -> SCNView {
+        let view = SCNView()
+//        view.allowsCameraControl = true
+        view.autoenablesDefaultLighting = true
+        view.antialiasingMode = .none
+        view.scene = .init(named: sceneName)
+        view.backgroundColor = .clear
+        
+        // Apply fade in effect
+
+
+        for model in toBloomModel {
+            view.scene?.rootNode.childNode(withName: model, recursively: true)?.filters = addBloom()
         }
+        if let node = view.scene?.rootNode.childNode(withName: "Cylinder_039", recursively: true) {
+            node.scale = SCNVector3(1, 1, 1)
+            // Start loop animation
+//            startLoopAnimation(node)
+        }
+        
+        view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true)?.filters = addBloom()
+        view.scene?.rootNode.childNode(withName: "Sphere_001", recursively: true)?.filters = addBloom()
+        
+        return view
+        
     }
     
-    func getTempLogo(temperature: Double) -> String {
-        if (temperature > 25) {
-            return ("thermometer.high")
-        } else if (temperature > 15) {
-            return ("thermometer.medium")
-        } else {
-            return ("thermometer.low")
-        }
+    func updateUIView(_ uiView: SCNView, context: Context) {
+        
     }
     
-    @ViewBuilder
-    func ScrollViewContent() -> some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 0) {
-                if (cityInfo?.hourly != nil) {
-                    ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
-                        VStack(spacing: 10) {
-                            Text("\(cityInfo!.hourly!.time[i].suffix(5))")
-                                .font(.system(size: 14, weight: .light))
-                                .opacity(0.8)
-//                            Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
-                            MiniSceneView(sceneName: "cloudy_night.scn")
-                                .frame(height: 40)
-                            VStack(spacing: 6) {
-                                HStack(spacing: 4) {
-                                    Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
-                                        .font(.system(size: 14))
-                                        .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°C")
-                                        .font(.system(size: 14, weight: .light))
-                                        .opacity(0.8)
-                                }
-                                HStack(spacing: 4) {
-                                    Image(systemName: "wind")
-                                        .font(.system(size: 14))
-                                        .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
-                                        .font(.system(size: 14, weight: .light))
-                                        .opacity(0.8)
-                                }
-                            }
-                        }
-                        .padding()
-//                        .background(.blue.gradient)
-                    }
-                }
-            }
-        }
-        .background(.black.opacity(0.2))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .padding(.horizontal)
+    func addBloom() -> [CIFilter]? {
+        let bloomFilter = CIFilter(name:"CIBloom")!
+        bloomFilter.setValue(0.2, forKey: "inputIntensity")
+        bloomFilter.setValue(5.0, forKey: "inputRadius")
+
+        return [bloomFilter]
     }
+
 }
 
 #Preview {

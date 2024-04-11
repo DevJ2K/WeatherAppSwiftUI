@@ -69,8 +69,8 @@ struct TodayCharts: View {
             Chart {
                 ForEach(chartsData, id: \.id) { chartHour in
                     LineMark(
-//                        x: .value("Hour", "\(chartHour.time.suffix(5))"),
-                        x: .value("Hour", chartHour.timeDate, unit: .hour),
+//                        x: .value("Hour", chartHour.time),
+                        x: .value("Hour", chartHour.timeDate),
                         y: .value("Temperature", chartHour.temperature)
                     )
                     .foregroundStyle(Color.blue.gradient)
@@ -79,16 +79,17 @@ struct TodayCharts: View {
 //                                            .fill(.indigo)
 //                                            .frame(width: 5)
 //                                    }
-                    PointMark(
-//                        x: .value("Hour", "\(chartHour.time.suffix(5))"),
-                        x: .value("Hour", chartHour.timeDate, unit: .hour),
-                        y: .value("Temperature", chartHour.temperature)
-                    )
+//                    PointMark(
+////                        x: .value("Hour", "\(chartHour.time.suffix(5))"),
+//                        x: .value("Hour", chartHour.timeDate, unit: .hour),
+//                        y: .value("Temperature", chartHour.temperature)
+//                    )
                     .foregroundStyle(.indigo)
                 }
                 
             }
             .frame(height: 250)
+            
             .chartXAxis {
                 AxisMarks(preset: .aligned, values: .stride(by: .hour, count: 3)) { axisValue in
                     if let date = axisValue.as(Date.self) {
@@ -98,7 +99,7 @@ struct TodayCharts: View {
                             formatter.locale = Locale(identifier: "en_US_POSIX")
                             formatter.timeZone = TimeZone(secondsFromGMT: 0)
                             let formattedDate = formatter.string(from: date)
-                            print(axisValue.index)
+//                            print(axisValue.index)
                             if (axisValue.index == 8) {
                                 return Text("")
                                     .font(.system(size: 8))
