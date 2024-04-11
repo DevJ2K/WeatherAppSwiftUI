@@ -30,10 +30,10 @@ func convertToDate(timeString: String) -> Date {
     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     
-    //    print(timeString)
+//        print(timeString)
     let date = dateFormatter.date(from: timeString)!
-    //    print(date)
-    //    print("++++")
+//        print(date)
+//        print("++++")
     return date
 }
 
@@ -47,7 +47,7 @@ func weeklyToChartsData(weekly: WeeklyData?) -> [ChartDayData] {
         let chartData = ChartDayData(time: weekly!.time[i], timeDate: convertToDate(timeString: weekly!.time[i]), temperature_2m_min: weekly!.temperature_2m_min[i], temperature_2m_max: weekly!.temperature_2m_max[i])
         chartDataArray.append(chartData)
     }
-    //    print(chartDataArray)
+//        print(chartDataArray)
     return chartDataArray
 }
 
@@ -57,7 +57,7 @@ struct WeeklyChart: View {
 
     var body: some View {
         let chartsData: [ChartDayData] = weeklyToChartsData(weekly: self.weekly)
-        
+
         VStack(spacing: 2) {
             Text("Weekly temperatures")
                 .font(.system(size: 16, weight: .light, design: .rounded))
@@ -100,22 +100,24 @@ struct WeeklyChart: View {
             .frame(height: 250)
             .chartLegend(position: .bottom, alignment: .center, spacing: 24) {
                 HStack(spacing: 12) {
-                    HStack(spacing: 2) {
+                    HStack(spacing: 4) {
                         Circle()
                             .fill(.red)
                             .frame(width: 6)
                         Text("Max temperature")
                             .font(.caption2)
-                            .foregroundStyle(.white).opacity(0.4)
+                            .fontWeight(.light)
+                            .foregroundStyle(.white).opacity(0.5)
                     }
-                    HStack(spacing: 2) {
+                    HStack(spacing: 4) {
                 
                         Circle()
                             .fill(.blue)
                             .frame(width: 6)
                         Text("Min temperature")
                             .font(.caption2)
-                            .foregroundStyle(.white).opacity(0.4)
+                            .fontWeight(.light)
+                            .foregroundStyle(.white).opacity(0.5)
                     }
                     
                 }
@@ -126,10 +128,7 @@ struct WeeklyChart: View {
                         AxisValueLabel(centered: true, multiLabelAlignment: .center) {
                             let formatter = DateFormatter()
                             formatter.dateFormat = "dd/MM"
-                            formatter.locale = Locale(identifier: "en_US_POSIX")
-                            formatter.timeZone = TimeZone(secondsFromGMT: 0)
                             let formattedDate = formatter.string(from: date)
-                            //                            print(axisValue.index)
                             if (axisValue.index == 7) {
                                 return Text("")
                                     .font(.system(size: 8))

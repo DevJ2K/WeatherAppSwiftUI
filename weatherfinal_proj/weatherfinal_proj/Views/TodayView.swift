@@ -29,26 +29,43 @@ struct TodayView: View {
         }
     }
     
+    func getCurrentHour(timezone: String?) -> String {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        if (timezone != nil) {
+            dateFormatter.timeZone = TimeZone(identifier: timezone!)
+        }
+        let currentHourString = dateFormatter.string(from: currentDate)
+        return currentHourString
+    }
+    
     @ViewBuilder
     func ScrollViewContent() -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 0) {
                 if (cityInfo?.hourly != nil) {
                     ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
-                        VStack(spacing: 10) {
-                            Text("\(cityInfo!.hourly!.time[i].suffix(5))")
-                                .font(.system(size: 14, weight: .light))
-                                .opacity(0.8)
+                        let currentHour = getCurrentHour(timezone: cityInfo!.city?.timezone)
+                        let i_hour = cityInfo!.hourly!.time[i].suffix(5).prefix(2)
+                        VStack(spacing: 12) {
+                            if (currentHour == i_hour) {
+                                Text("Now")
+                                    .font(.system(size: 14, weight: .bold))
+                            } else {
+                                Text("\(i_hour)h")
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
 //                            Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
                             MiniSceneView(sceneName: "cloudy_night.scn")
                                 .frame(height: 40)
-                            VStack(spacing: 6) {
+                            VStack(spacing: 4) {
                                 HStack(spacing: 4) {
                                     Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
                                         .font(.system(size: 14))
                                         .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°C")
-                                        .font(.system(size: 14, weight: .light))
+                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°")
+                                        .font(.system(size: 14, weight: .bold))
                                         .opacity(0.8)
                                 }
                                 HStack(spacing: 4) {

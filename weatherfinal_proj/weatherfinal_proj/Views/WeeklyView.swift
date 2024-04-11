@@ -25,21 +25,28 @@ struct WeeklyView: View {
             HStack(spacing: 0) {
                 if (cityInfo?.daily != nil) {
                     ForEach(0 ..< min(7, cityInfo!.daily!.time.count), id: \.self) { i in
-                        VStack(spacing: 10) {
-                            Text("\(cityInfo!.daily!.time[i].split(separator: "-")[2])/\(cityInfo!.daily!.time[i].split(separator: "-")[1])")
-                                .font(.system(size: 14, weight: .light))
-                                .opacity(0.8)
+                        VStack(spacing: 12) {
+                            if (i == 0) {
+                                Text("Today")
+                                    .font(.system(size: 14, weight: .semibold))
+                            } else if (i == 1) {
+                                Text("Tomorrow")
+                                    .font(.system(size: 14, weight: .semibold))
+                            } else {
+                                Text("\(cityInfo!.daily!.time[i].split(separator: "-")[2])/\(cityInfo!.daily!.time[i].split(separator: "-")[1])")
+                                    .font(.system(size: 14, weight: .semibold))
+                                
+                            }
 //                            Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
                             MiniSceneView(sceneName: "cloudy_night.scn")
                                 .frame(height: 40)
-                            VStack(spacing: 6) {
+                            VStack(spacing: 4) {
                                 HStack(spacing: 4) {
 //                                    Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
 //                                        .font(.system(size: 14))
 //                                        .opacity(0.8)
                                     Text("\(String(format: "%.1f", cityInfo!.daily!.temperature_2m_max[i]))°C max")
-                                        .font(.system(size: 14, weight: .light))
-                                        .opacity(0.8)
+                                        .font(.system(size: 14, weight: .semibold))
                                         .foregroundStyle(.orange)
                                 }
                                 HStack(spacing: 4) {
@@ -47,8 +54,7 @@ struct WeeklyView: View {
 //                                        .font(.system(size: 14))
 //                                        .opacity(0.8)
                                     Text("\(String(format: "%.1f", cityInfo!.daily!.temperature_2m_min[i]))°C min")
-                                        .font(.system(size: 14, weight: .light))
-                                        .opacity(0.8)
+                                        .font(.system(size: 14, weight: .semibold))
                                         .foregroundStyle(.blue)
                                 }
                             }
