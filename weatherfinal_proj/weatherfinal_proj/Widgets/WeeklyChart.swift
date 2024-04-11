@@ -102,7 +102,7 @@ struct WeeklyChart: View {
                 HStack(spacing: 12) {
                     HStack(spacing: 4) {
                         Circle()
-                            .fill(.red)
+                            .fill(.orange)
                             .frame(width: 6)
                         Text("Max temperature")
                             .font(.caption2)
