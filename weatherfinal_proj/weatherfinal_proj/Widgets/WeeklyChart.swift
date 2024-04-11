@@ -1,8 +1,8 @@
 //
-//  TodayCharts.swift
+//  WeeklyChart.swift
 //  weatherfinal_proj
 //
-//  Created by Théo Ajavon on 09/04/2024.
+//  Created by Théo Ajavon on 11/04/2024.
 //
 
 import SwiftUI
@@ -16,7 +16,7 @@ import Charts
 //    "wind_speed_10m": [18.2, 17.3, 18.7, 17.2]
 //},
 
-struct ChartHourData {
+struct ChartDayData {
     var id = UUID()
     var time: String
     //    var hour: Int
@@ -27,21 +27,21 @@ struct ChartHourData {
 }
 
 // Function to convert time strings to Hour objects
-func convertToHours(timeString: String) -> Date {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
-    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-    
-    //    print(timeString)
-    let date = dateFormatter.date(from: timeString)!
-    //    print(date)
-    //    print("++++")
-    return date
-}
+//func convertToHours(timeString: String) -> Date {
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+//    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+//    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//    
+//    //    print(timeString)
+//    let date = dateFormatter.date(from: timeString)!
+//    //    print(date)
+//    //    print("++++")
+//    return date
+//}
 
-func hourlyToChartsData(hourly: HourlyData?) -> [ChartHourData] {
-    var chartDataArray: [ChartHourData] = []
+func dateToChartsData(weekly: WeeklyData?) -> [ChartDayData] {
+    var chartDataArray: [ChartDayData] = []
     
     
     //    ForEach(0 ..< min(24, hourly!.time.count), id: \.self) { i in
@@ -54,7 +54,7 @@ func hourlyToChartsData(hourly: HourlyData?) -> [ChartHourData] {
     return chartDataArray
 }
 
-struct TodayCharts: View {
+struct TodayChart: View {
     
     var hourly: HourlyData?
     @State private var rawSelectedTemperature: ClosedRange<Date>?
@@ -197,7 +197,7 @@ struct TodayCharts: View {
     
     
     
-    TodayCharts(
+    TodayChart(
         hourly: HourlyData(time: ["2024-04-04T00:00", "2024-04-04T01:00", "2024-04-04T02:00", "2024-04-04T03:00", "2024-04-04T04:00", "2024-04-04T05:00", "2024-04-04T06:00", "2024-04-04T07:00", "2024-04-04T08:00", "2024-04-04T09:00",
                                   "2024-04-04T10:00", "2024-04-04T11:00", "2024-04-04T12:00", "2024-04-04T13:00", "2024-04-04T14:00",
                                   "2024-04-04T15:00", "2024-04-04T16:00", "2024-04-04T17:00", "2024-04-04T18:00", "2024-04-04T19:00",
