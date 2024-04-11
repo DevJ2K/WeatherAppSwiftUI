@@ -19,7 +19,7 @@ import Charts
 struct ChartHourData {
     var id = UUID()
     var time: String
-//    var hour: Int
+    //    var hour: Int
     var timeDate: Date
     var temperature: Double
     var weather_code: Int8
@@ -33,10 +33,10 @@ func convertToHours(timeString: String) -> Date {
     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     
-//    print(timeString)
+    //    print(timeString)
     let date = dateFormatter.date(from: timeString)!
-//    print(date)
-//    print("++++")
+    //    print(date)
+    //    print("++++")
     return date
 }
 
@@ -69,27 +69,31 @@ struct TodayCharts: View {
             Chart {
                 ForEach(chartsData, id: \.id) { chartHour in
                     LineMark(
-//                        x: .value("Hour", chartHour.time),
                         x: .value("Hour", chartHour.timeDate),
                         y: .value("Temperature", chartHour.temperature)
                     )
+                    .interpolationMethod(.catmullRom)
                     .foregroundStyle(Color.blue.gradient)
-//                                    .symbol {
-//                                        Circle()
-//                                            .fill(.indigo)
-//                                            .frame(width: 5)
-//                                    }
-//                    PointMark(
-////                        x: .value("Hour", "\(chartHour.time.suffix(5))"),
-//                        x: .value("Hour", chartHour.timeDate, unit: .hour),
-//                        y: .value("Temperature", chartHour.temperature)
-//                    )
-                    .foregroundStyle(.indigo)
+                    .symbol {
+                        Circle()
+                            .fill(.indigo)
+                            .frame(width: 7)
+                    }
+                    
+                    AreaMark(
+                        x: .value("Hour", chartHour.timeDate),
+                        y: .value("Temperature", chartHour.temperature)
+                    )
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(LinearGradient(colors: [.blue, .blue.opacity(0.7), .blue.opacity(0.05)], startPoint: .top, endPoint: .bottom))
+                    .opacity(0.2)
+                    
+                    
+                    
                 }
                 
             }
             .frame(height: 250)
-            
             .chartXAxis {
                 AxisMarks(preset: .aligned, values: .stride(by: .hour, count: 3)) { axisValue in
                     if let date = axisValue.as(Date.self) {
@@ -99,13 +103,13 @@ struct TodayCharts: View {
                             formatter.locale = Locale(identifier: "en_US_POSIX")
                             formatter.timeZone = TimeZone(secondsFromGMT: 0)
                             let formattedDate = formatter.string(from: date)
-//                            print(axisValue.index)
+                            //                            print(axisValue.index)
                             if (axisValue.index == 8) {
                                 return Text("")
                                     .font(.system(size: 8))
                             }
                             return Text("\(formattedDate)")
-//                                .foregroundColor(Color.white)
+                            //                                .foregroundColor(Color.white)
                                 .font(.system(size: 8))
                         }
                     }
@@ -198,6 +202,6 @@ struct TodayCharts: View {
                                   "2024-04-04T10:00", "2024-04-04T11:00", "2024-04-04T12:00", "2024-04-04T13:00", "2024-04-04T14:00",
                                   "2024-04-04T15:00", "2024-04-04T16:00", "2024-04-04T17:00", "2024-04-04T18:00", "2024-04-04T19:00",
                                   "2024-04-04T20:00", "2024-04-04T21:00", "2024-04-04T22:00", "2024-04-04T23:00",], temperature_2m: [13.0, 7.8, 13.3, 13.2, 25, 26.7, 28.1, 29.5, 30.2, 31.8, 32.5, 32.9, 33.2, 33.5, 33.8, 33.9, 33.6, 33.2, 32.8, 32.5, 32.2,
-                                                                                                                                    32.0, 31.8, 31.5, 31.2, 30.9, 30.6, 30.3, 30.0], weather_code: [2, 61, 61, 61, 61, 61, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32], wind_speed_10m: [18.2, 17.3, 18.7, 17.2, 19, 20.1, 21.5, 22.3, 23.6, 24.9, 25.3, 25.8, 26.2, 26.5, 26.7, 26.8, 26.6, 26.3, 26.0, 25.7, 25.4,
-                                                                                                                                                                                                                                                                                                                                         25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0]))
+                                                                                                                                     32.0, 31.8, 31.5, 31.2, 30.9, 30.6, 30.3, 30.0], weather_code: [2, 61, 61, 61, 61, 61, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32], wind_speed_10m: [18.2, 17.3, 18.7, 17.2, 19, 20.1, 21.5, 22.3, 23.6, 24.9, 25.3, 25.8, 26.2, 26.5, 26.7, 26.8, 26.6, 26.3, 26.0, 25.7, 25.4,
+                                                                                                                                                                                                                                                                                                                                          25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0]))
 }
