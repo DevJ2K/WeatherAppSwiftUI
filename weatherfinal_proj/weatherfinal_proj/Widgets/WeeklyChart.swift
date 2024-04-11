@@ -73,7 +73,7 @@ struct WeeklyChart: View {
                     )
                     .lineStyle(StrokeStyle(lineWidth: 1))
                     .interpolationMethod(.catmullRom)
-//                    .foregroundStyle(Color.orange.gradient)
+                    .foregroundStyle(Color.orange.gradient)
                     .foregroundStyle(by: .value("max", "Max temperature"))
                     
                     .symbol {
@@ -88,42 +88,31 @@ struct WeeklyChart: View {
                     )
                     .lineStyle(StrokeStyle(lineWidth: 1))
                     .interpolationMethod(.catmullRom)
-//                    .foregroundStyle(Color.blue.gradient)
+                    .foregroundStyle(Color.blue.gradient)
                     .foregroundStyle(by: .value("min", "Min temperature"))
                     .symbol {
                         Circle()
                             .fill(.white)
                             .frame(width: 4)
                     }
-                    
-                    //                    AreaMark(
-                    //                        x: .value("Hour", chartHour.timeDate),
-                    //                        y: .value("Temperature", chartHour.temperature)
-                    //                    )
-                    //                    .interpolationMethod(.catmullRom)
-                    //                    .foregroundStyle(LinearGradient(colors: [.blue, .blue.opacity(0.7), .blue.opacity(0.05)], startPoint: .top, endPoint: .bottom))
-                    //                    .opacity(0.2)
-                    
-                    
-                    
                 }
                 
             }
             .frame(height: 250)
-            .chartLegend(position: .bottom, alignment: .leading, spacing: 24) {
+            .chartLegend(position: .bottom, alignment: .center, spacing: 24) {
                 HStack(spacing: 12) {
                     HStack(spacing: 2) {
                         Circle()
-                            .fill(.blue)
+                            .fill(.red)
                             .frame(width: 6)
-                        Text("Min temperature")
+                        Text("Max temperature")
                             .font(.caption2)
                             .foregroundStyle(.white).opacity(0.4)
                     }
                     HStack(spacing: 2) {
                 
                         Circle()
-                            .fill(.red)
+                            .fill(.blue)
                             .frame(width: 6)
                         Text("Min temperature")
                             .font(.caption2)

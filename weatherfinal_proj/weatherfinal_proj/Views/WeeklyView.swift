@@ -37,17 +37,19 @@ struct WeeklyView: View {
 //                                    Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
 //                                        .font(.system(size: 14))
 //                                        .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°C")
+                                    Text("\(String(format: "%.1f", cityInfo!.daily!.temperature_2m_max[i]))°C max")
                                         .font(.system(size: 14, weight: .light))
                                         .opacity(0.8)
+                                        .foregroundStyle(.orange)
                                 }
                                 HStack(spacing: 4) {
-                                    Image(systemName: "wind")
-                                        .font(.system(size: 14))
-                                        .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
+//                                    Image(systemName: "wind")
+//                                        .font(.system(size: 14))
+//                                        .opacity(0.8)
+                                    Text("\(String(format: "%.1f", cityInfo!.daily!.temperature_2m_min[i]))°C min")
                                         .font(.system(size: 14, weight: .light))
                                         .opacity(0.8)
+                                        .foregroundStyle(.blue)
                                 }
                             }
                         }
@@ -64,7 +66,7 @@ struct WeeklyView: View {
 }
 
 #Preview {
-    return ContentView()
+//    return ContentView()
     let jsonString = """
         {
             "city": {
