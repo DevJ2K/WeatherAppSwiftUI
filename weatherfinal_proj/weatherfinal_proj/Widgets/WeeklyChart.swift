@@ -57,7 +57,6 @@ struct WeeklyChart: View {
 
     var body: some View {
         let chartsData: [ChartDayData] = weeklyToChartsData(weekly: self.weekly)
-        let stackColors: [Color] = [.blue, .orange]
         
         VStack(spacing: 2) {
             Text("Weekly temperatures")
@@ -126,7 +125,7 @@ struct WeeklyChart: View {
                     if let date = axisValue.as(Date.self) {
                         AxisValueLabel(centered: true, multiLabelAlignment: .center) {
                             let formatter = DateFormatter()
-                            formatter.dateFormat = "MM/dd"
+                            formatter.dateFormat = "dd/MM"
                             formatter.locale = Locale(identifier: "en_US_POSIX")
                             formatter.timeZone = TimeZone(secondsFromGMT: 0)
                             let formattedDate = formatter.string(from: date)

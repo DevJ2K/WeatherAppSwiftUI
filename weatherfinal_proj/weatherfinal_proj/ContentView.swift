@@ -230,7 +230,7 @@ struct ContentView: View {
                 })
             } else {
                 
-                if (locationManager.cityInfo != nil) {
+                if (locationManager.isFetchingCityInfo == false && locationManager.cityInfo != nil) {
                     VStack {
                         Text(locationManager.cityInfo?.city?.name ?? "Unknown")
                             .bold()
