@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-
-
 struct ContentView: View {
     @State private var cities = [City]()
     @State private var searchText = ""
@@ -55,7 +52,19 @@ struct ContentView: View {
         //        }
     }
     
+    func getRealBackground(weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
+        if (showSearchBar) {
+            return LinearGradient(colors: [colorScheme == .dark ? .black : .white], startPoint: .center, endPoint: .center)
+        } else if (weatherInfo != nil) {
+            return weatherInfo!.backgroundDay
+        } else {
+            return LinearGradient(
+                gradient: Gradient(colors: [.purple.opacity(colorScheme == .dark ? 0.2 : 0.7), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+        }
+    }
+    
     var body: some View {
+        let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: LocationManager.shared.cityInfo?.current?.weather_code ?? -1)
         VStack(spacing: 0) {
             // HEADER
             HStack {
@@ -245,7 +254,7 @@ struct ContentView: View {
                         }
                         Text("")
                     }
-//                    .padding()
+                    //                    .padding()
                 }
                 TabView(selection: $selectedTab) {
                     
@@ -359,17 +368,8 @@ struct ContentView: View {
         }
         .preferredColorScheme(.dark)
         .padding(.bottom, 20)
-//        .background(
-//        Image("bg_image")
-//            .resizable()
-//        )
-//        .ignoresSafeArea(.all)
-        .background(showSearchBar ?
-                    LinearGradient(colors: [colorScheme == .dark ? .black : .white], startPoint: .center, endPoint: .center) :
-                        LinearGradient(
-                            gradient: Gradient(colors: [.purple.opacity(colorScheme == .dark ? 0.2 : 0.7), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
-                .ignoresSafeArea(edges: searchBarNoAnimation ? [] : .bottom)
-        .ignoresSafeArea(edges: .bottom)
+        .background(getRealBackground(weatherInfo: weatherInfo, showSearchBar: showSearchBar))
+        .ignoresSafeArea(edges: searchBarNoAnimation ? [] : .bottom)
     }
 }
 

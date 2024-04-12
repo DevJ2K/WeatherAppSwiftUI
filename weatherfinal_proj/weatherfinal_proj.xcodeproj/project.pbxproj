@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E407BD0B2BC930170004BAFB /* weatherfinal-proj-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E407BD0A2BC930170004BAFB /* weatherfinal-proj-Info.plist */; };
+		E407BD0D2BC93B900004BAFB /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E407BD0C2BC93B900004BAFB /* SplashScreenView.swift */; };
 		E42784752BBB21450095FB12 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42784742BBB21450095FB12 /* LocationManager.swift */; };
 		E42AA0E52BB6DC6D0091B4C5 /* weatherfinal_projApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AA0E42BB6DC6D0091B4C5 /* weatherfinal_projApp.swift */; };
 		E42AA0E72BB6DC6D0091B4C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AA0E62BB6DC6D0091B4C5 /* ContentView.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E407BD0A2BC930170004BAFB /* weatherfinal-proj-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "weatherfinal-proj-Info.plist"; sourceTree = "<group>"; };
+		E407BD0C2BC93B900004BAFB /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		E42784742BBB21450095FB12 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E42AA0E12BB6DC6D0091B4C5 /* weatherfinal_proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherfinal_proj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AA0E42BB6DC6D0091B4C5 /* weatherfinal_projApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherfinal_projApp.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 		E42AA0E32BB6DC6D0091B4C5 /* weatherfinal_proj */ = {
 			isa = PBXGroup;
 			children = (
+				E407BD0A2BC930170004BAFB /* weatherfinal-proj-Info.plist */,
 				E45D44062BC448E700F43519 /* Widgets */,
 				E45D43EB2BC4353300F43519 /* 3D_Objects */,
 				E43155882BBB5B02005EFA4D /* API */,
@@ -110,6 +115,7 @@
 				E42AA0E62BB6DC6D0091B4C5 /* ContentView.swift */,
 				E42AA0E82BB6DC700091B4C5 /* Assets.xcassets */,
 				E42AA0EA2BB6DC700091B4C5 /* Preview Content */,
+				E407BD0C2BC93B900004BAFB /* SplashScreenView.swift */,
 			);
 			path = weatherfinal_proj;
 			sourceTree = "<group>";
@@ -244,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E407BD0B2BC930170004BAFB /* weatherfinal-proj-Info.plist in Resources */,
 				E45D43F72BC4365400F43519 /* light_rain.scn in Resources */,
 				E45D44052BC436D700F43519 /* thunderstorm.scn in Resources */,
 				E45D43F32BC435E500F43519 /* heavy_rain.scn in Resources */,
@@ -271,6 +278,7 @@
 			files = (
 				E42AA0E72BB6DC6D0091B4C5 /* ContentView.swift in Sources */,
 				E481A9B52BB6DF88005C6DD0 /* CurrentlyView.swift in Sources */,
+				E407BD0D2BC93B900004BAFB /* SplashScreenView.swift in Sources */,
 				E42AA0E52BB6DC6D0091B4C5 /* weatherfinal_projApp.swift in Sources */,
 				E45D440A2BC4491600F43519 /* CurrentInfoDash.swift in Sources */,
 				E42784752BBB21450095FB12 /* LocationManager.swift in Sources */,
@@ -419,12 +427,12 @@
 				DEVELOPMENT_TEAM = UXC33S4TT6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "weatherfinal-proj-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Weather42;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -452,12 +460,12 @@
 				DEVELOPMENT_TEAM = UXC33S4TT6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "weatherfinal-proj-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Weather42;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

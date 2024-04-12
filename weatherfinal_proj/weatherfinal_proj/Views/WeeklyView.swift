@@ -65,7 +65,7 @@ struct WeeklyView: View {
                 }
             }
         }
-        .background(.black.opacity(0.2))
+        .background(.black.opacity(0.6))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.horizontal)
     }

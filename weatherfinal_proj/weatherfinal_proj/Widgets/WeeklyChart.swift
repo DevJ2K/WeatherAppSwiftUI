@@ -157,7 +157,7 @@ struct WeeklyChart: View {
             }
             .padding()
         }
-        .background(Color.black.opacity(0.2))
+        .background(Color.black.opacity(0.6))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding()
     }

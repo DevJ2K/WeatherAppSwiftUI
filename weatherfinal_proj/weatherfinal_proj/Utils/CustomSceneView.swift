@@ -21,10 +21,14 @@ struct CustomSceneView: UIViewRepresentable {
         view.scene = .init(named: sceneName)
         view.backgroundColor = .clear
         
+        print(sceneName)
         // Apply fade in effect
-        view.scene?.rootNode.opacity = 0
-        let fadeInAction = SCNAction.fadeIn(duration: 1.5)
-        view.scene?.rootNode.runAction(fadeInAction)
+        view.scene?.rootNode.opacity = 0.0
+        if (sceneName == "sunny.scn") {
+            
+            let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 1.5)
+            view.scene?.rootNode.runAction(fadeInAction)
+        }
 
 //        view.pointOfView?.position.y -= 0.1
 //        view.pointOfView = view.scene?.rootNode.childNode(withName: "camera", recursively: true)
