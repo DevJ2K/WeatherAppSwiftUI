@@ -29,9 +29,9 @@ struct WeeklyView: View {
                             if (i == 0) {
                                 Text("Today")
                                     .font(.system(size: 14, weight: .semibold))
-                            } else if (i == 1) {
-                                Text("Tomorrow")
-                                    .font(.system(size: 14, weight: .semibold))
+//                            } else if (i == 1) {
+//                                Text("Tomorrow")
+//                                    .font(.system(size: 14, weight: .semibold))
                             } else {
                                 Text("\(cityInfo!.daily!.time[i].split(separator: "-")[2])/\(cityInfo!.daily!.time[i].split(separator: "-")[1])")
                                     .font(.system(size: 14, weight: .semibold))
