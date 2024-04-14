@@ -16,8 +16,13 @@ struct CurrentlyView: View {
             ScrollView {
                 VStack {
                     if (weatherInfo != nil) {
-                        CustomSceneView(sceneName: "\(weatherInfo!.dayModel).scn")
-                            .frame(height: 300)
+                        if (cityInfo?.current?.is_day == 0 && weatherInfo?.nightModel != nil) {
+                            CustomSceneView(sceneName: "\(weatherInfo!.nightModel).scn")
+                                .frame(height: 300)
+                        } else {
+                            CustomSceneView(sceneName: "\(weatherInfo!.dayModel).scn")
+                                .frame(height: 300)
+                        }
                     }
                     VStack(spacing: 6) {
                         if (cityInfo?.current?.temperature_2m != nil) {

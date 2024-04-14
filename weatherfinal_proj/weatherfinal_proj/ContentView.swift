@@ -52,11 +52,17 @@ struct ContentView: View {
         //        }
     }
     
-    func getRealBackground(weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
+    func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
+        print(":::::")
+        print(cityInfo?.current?.is_day ?? 3)
         if (showSearchBar) {
             return LinearGradient(colors: [colorScheme == .dark ? .black : .white], startPoint: .center, endPoint: .center)
         } else if (weatherInfo != nil) {
-            return weatherInfo!.backgroundDay
+            if (cityInfo?.current?.is_day == 0) {
+                return weatherInfo!.backgroundNight
+            } else {
+                return weatherInfo!.backgroundDay
+            }
         } else {
             return LinearGradient(
                 gradient: Gradient(colors: [.purple.opacity(colorScheme == .dark ? 0.2 : 0.7), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
@@ -368,7 +374,7 @@ struct ContentView: View {
         }
         .preferredColorScheme(.dark)
         .padding(.bottom, 20)
-        .background(getRealBackground(weatherInfo: weatherInfo, showSearchBar: showSearchBar))
+        .background(getRealBackground(cityInfo: LocationManager.shared.cityInfo, weatherInfo: weatherInfo, showSearchBar: showSearchBar))
         .ignoresSafeArea(edges: searchBarNoAnimation ? [] : .bottom)
     }
 }

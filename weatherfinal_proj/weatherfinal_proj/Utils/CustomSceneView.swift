@@ -26,7 +26,10 @@ struct CustomSceneView: UIViewRepresentable {
         view.scene?.rootNode.opacity = 0.0
         if (sceneName == "sunny.scn") {
             
-            let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 1.5)
+            let fadeInAction = SCNAction.fadeOpacity(by: 0.8, duration: 1.5)
+            view.scene?.rootNode.runAction(fadeInAction)
+        } else {
+            let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.5)
             view.scene?.rootNode.runAction(fadeInAction)
         }
 
