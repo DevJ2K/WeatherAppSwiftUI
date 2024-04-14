@@ -56,6 +56,7 @@ func hourlyToChartsData(hourly: HourlyData?) -> [ChartHourData] {
 
 struct TodayChart: View {
     
+    var cityInfo: CityInfo?
     var hourly: HourlyData?
     @State private var rawSelectedTemperature: ClosedRange<Date>?
     var body: some View {
@@ -85,7 +86,8 @@ struct TodayChart: View {
                         y: .value("Temperature", chartHour.temperature)
                     )
                     .interpolationMethod(.catmullRom)
-                    .foregroundStyle(LinearGradient(colors: [.blue, .blue.opacity(0.7), .blue.opacity(0.05)], startPoint: .top, endPoint: .bottom))
+//                    .foregroundStyle(LinearGradient(colors: [.blue, .blue.opacity(0.7), .blue.opacity(0.05)], startPoint: .top, endPoint: .bottom))
+                    .foregroundStyle(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo?.current?.weather_code), showSearchBar: false))
                     .opacity(0.2)
                     
                     
@@ -133,7 +135,7 @@ struct TodayChart: View {
             }
             .padding()
         }
-        .background(Color.black.opacity(0.6))
+        .background(Color.black.opacity(0.5))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding()
     }
@@ -156,7 +158,7 @@ struct TodayChart: View {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
                 "is_day": 1,
-                "weather_code": 80,
+                "weather_code": 1,
                 "wind_speed_10m": 18.9
             },
             "hourly": {
@@ -187,8 +189,7 @@ struct TodayChart: View {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
         return TodayView(cityInfo: cityInfo)
-            .background(LinearGradient(
-                gradient: Gradient(colors: [.purple.opacity(0.2), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
+            .background(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo.current?.weather_code), showSearchBar: false))
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)
@@ -197,11 +198,11 @@ struct TodayChart: View {
     
     
     
-    TodayChart(
-        hourly: HourlyData(time: ["2024-04-04T00:00", "2024-04-04T01:00", "2024-04-04T02:00", "2024-04-04T03:00", "2024-04-04T04:00", "2024-04-04T05:00", "2024-04-04T06:00", "2024-04-04T07:00", "2024-04-04T08:00", "2024-04-04T09:00",
-                                  "2024-04-04T10:00", "2024-04-04T11:00", "2024-04-04T12:00", "2024-04-04T13:00", "2024-04-04T14:00",
-                                  "2024-04-04T15:00", "2024-04-04T16:00", "2024-04-04T17:00", "2024-04-04T18:00", "2024-04-04T19:00",
-                                  "2024-04-04T20:00", "2024-04-04T21:00", "2024-04-04T22:00", "2024-04-04T23:00",], temperature_2m: [13.0, 7.8, 13.3, 13.2, 25, 26.7, 28.1, 29.5, 30.2, 31.8, 32.5, 32.9, 33.2, 33.5, 33.8, 33.9, 33.6, 33.2, 32.8, 32.5, 32.2,
-                                                                                                                                     32.0, 31.8, 31.5, 31.2, 30.9, 30.6, 30.3, 30.0], weather_code: [2, 61, 61, 61, 61, 61, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32], wind_speed_10m: [18.2, 17.3, 18.7, 17.2, 19, 20.1, 21.5, 22.3, 23.6, 24.9, 25.3, 25.8, 26.2, 26.5, 26.7, 26.8, 26.6, 26.3, 26.0, 25.7, 25.4,
-                                                                                                                                                                                                                                                                                                                                          25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0]))
+//    TodayChart(
+//        hourly: HourlyData(time: ["2024-04-04T00:00", "2024-04-04T01:00", "2024-04-04T02:00", "2024-04-04T03:00", "2024-04-04T04:00", "2024-04-04T05:00", "2024-04-04T06:00", "2024-04-04T07:00", "2024-04-04T08:00", "2024-04-04T09:00",
+//                                  "2024-04-04T10:00", "2024-04-04T11:00", "2024-04-04T12:00", "2024-04-04T13:00", "2024-04-04T14:00",
+//                                  "2024-04-04T15:00", "2024-04-04T16:00", "2024-04-04T17:00", "2024-04-04T18:00", "2024-04-04T19:00",
+//                                  "2024-04-04T20:00", "2024-04-04T21:00", "2024-04-04T22:00", "2024-04-04T23:00",], temperature_2m: [13.0, 7.8, 13.3, 13.2, 25, 26.7, 28.1, 29.5, 30.2, 31.8, 32.5, 32.9, 33.2, 33.5, 33.8, 33.9, 33.6, 33.2, 32.8, 32.5, 32.2,
+//                                                                                                                                     32.0, 31.8, 31.5, 31.2, 30.9, 30.6, 30.3, 30.0], weather_code: [2, 61, 61, 61, 61, 61, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32], wind_speed_10m: [18.2, 17.3, 18.7, 17.2, 19, 20.1, 21.5, 22.3, 23.6, 24.9, 25.3, 25.8, 26.2, 26.5, 26.7, 26.8, 26.6, 26.3, 26.0, 25.7, 25.4,
+//                                                                                                                                                                                                                                                                                                                                          25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0]))
 }

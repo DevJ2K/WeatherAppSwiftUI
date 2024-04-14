@@ -13,7 +13,7 @@ struct TodayView: View {
     var body: some View {
         ScrollView {
             VStack {
-                TodayChart(hourly: cityInfo?.hourly)
+                TodayChart(cityInfo: cityInfo, hourly: cityInfo?.hourly)
                 ScrollViewContent()
             }
         }

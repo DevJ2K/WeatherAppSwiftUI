@@ -52,23 +52,6 @@ struct ContentView: View {
         //        }
     }
     
-    func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
-        print(":::::")
-        print(cityInfo?.current?.is_day ?? 3)
-        if (showSearchBar) {
-            return LinearGradient(colors: [colorScheme == .dark ? .black : .white], startPoint: .center, endPoint: .center)
-        } else if (weatherInfo != nil) {
-            if (cityInfo?.current?.is_day == 0) {
-                return weatherInfo!.backgroundNight
-            } else {
-                return weatherInfo!.backgroundDay
-            }
-        } else {
-            return LinearGradient(
-                gradient: Gradient(colors: [.purple.opacity(colorScheme == .dark ? 0.2 : 0.7), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-        }
-    }
-    
     var body: some View {
         let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: LocationManager.shared.cityInfo?.current?.weather_code ?? -1)
         VStack(spacing: 0) {
