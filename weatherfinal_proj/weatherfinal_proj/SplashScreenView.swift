@@ -24,7 +24,7 @@ struct SplashScreenView: View {
                     Text("Weather42")
                         .font(.system(size: 36, weight: .bold))
                         .italic()
-                    CustomSceneView(sceneName: "cloudy_night.scn")
+                    CustomSceneView(sceneName: "cloudy_night")
                         .frame(height: 290)
                     //                    Image("icon")
                     //                        .resizable()

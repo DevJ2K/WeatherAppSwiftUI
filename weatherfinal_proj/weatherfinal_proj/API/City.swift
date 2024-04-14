@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SceneKit
 
 
 struct CityResult: Codable {
@@ -148,13 +149,51 @@ func getWeatherInfo(weather_code: Int8?) -> WeatherInfo? {
     if (weather_code == nil) {
         return nil
     }
-    print(weather_code!)
+//    print(weather_code!)
     return (WeatherMap.data["\(weather_code!)"] ?? nil)
 }
 
+//let models3D = {
+//    var dictionnary: [String: SCNScene?] = [:]
+//    let all_models: [String] = ["clear_moon", "cloudy_night", "cloudy", "heavy_rain", "heavy_snow", "light_rain", "light_thunderstorm", "partly_cloudy", "snowfall", "sunny", "thunder_cloud", "thunderstorm_with_hail", "thunderstorm"]
+//    
+//    for modelString in all_models {
+//        if let sceneUrl = Bundle.main.url(forResource: modelString, withExtension: "scn") {
+//            do {
+//                let scene = try SCNScene(url: sceneUrl, options: nil)
+//                dictionnary[modelString] = scene
+//            } catch {
+//                print("Failed to load 3D models : \(modelString)")
+//            }
+//        }
+//    }
+//    print(dictionnary)
+//    return dictionnary
+//}()
+
+let models3D: [String: SCNScene?] = [:]
+
+func get3DModel(sceneName: String) -> SCNScene? {
+    if let model = models3D[sceneName] {
+        return model
+    }
+    return nil
+}
+
+//func getModelByWeatherCode(isDay: Int8?, weather_code: Int8?) -> String {
+//    guard let weatherInfo = getWeatherInfo(weather_code: weather_code) else { return "" }
+//    if (isDay == nil || isDay == 1) {
+//        return weatherInfo.dayModel
+//    } else {
+//        return weatherInfo.nightModel
+//    }
+//}
+
+
+
 func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
     print(":::::")
-    print(cityInfo?.current?.is_day ?? 3)
+//    print(cityInfo?.current?.is_day ?? 3)
     if (showSearchBar) {
         return LinearGradient(colors: [Color.black], startPoint: .center, endPoint: .center)
     } else if (weatherInfo != nil) {

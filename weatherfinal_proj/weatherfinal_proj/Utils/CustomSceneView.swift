@@ -15,21 +15,26 @@ struct CustomSceneView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
+//        print("MODEL : \(sceneName)")
+        var scene = get3DModel(sceneName: sceneName)
+        if (scene == nil) {
+            scene = .init(named: "\(sceneName).scn")
+        }
+        
 //        view.allowsCameraControl = true
         view.autoenablesDefaultLighting = true
         view.antialiasingMode = .multisampling2X
-        view.scene = .init(named: sceneName)
+        view.scene = scene
         view.backgroundColor = .clear
-        
-        print(sceneName)
+    
         // Apply fade in effect
         view.scene?.rootNode.opacity = 0.0
         if (sceneName == "sunny.scn") {
             
-            let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 1.5)
+            let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 0.5)
             view.scene?.rootNode.runAction(fadeInAction)
         } else {
-            let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.5)
+            let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.0)
             view.scene?.rootNode.runAction(fadeInAction)
         }
 

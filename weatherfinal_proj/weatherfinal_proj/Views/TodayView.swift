@@ -57,7 +57,7 @@ struct TodayView: View {
                                     .font(.system(size: 14, weight: .semibold))
                             }
 //                            Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
-                            MiniSceneView(sceneName: "cloudy_night.scn")
+                            MiniSceneView(sceneName: "cloudy_night")
                                 .frame(height: 40)
                             VStack(spacing: 4) {
                                 HStack(spacing: 4) {

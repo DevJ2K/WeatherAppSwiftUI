@@ -15,10 +15,15 @@ struct MiniSceneView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
+        var scene = get3DModel(sceneName: sceneName)
+        if (scene == nil) {
+            scene = .init(named: "\(sceneName).scn")
+        }
+        
 //        view.allowsCameraControl = true
         view.autoenablesDefaultLighting = true
-        view.antialiasingMode = .none
-        view.scene = .init(named: sceneName)
+        view.antialiasingMode = .multisampling2X
+        view.scene = scene
         view.backgroundColor = .clear
         
         // Apply fade in effect

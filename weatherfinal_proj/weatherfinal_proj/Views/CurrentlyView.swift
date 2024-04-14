@@ -17,10 +17,10 @@ struct CurrentlyView: View {
                 VStack {
                     if (weatherInfo != nil) {
                         if (cityInfo?.current?.is_day == 0 && weatherInfo?.nightModel != nil) {
-                            CustomSceneView(sceneName: "\(weatherInfo!.nightModel).scn")
+                            CustomSceneView(sceneName: weatherInfo!.nightModel)
                                 .frame(height: 300)
                         } else {
-                            CustomSceneView(sceneName: "\(weatherInfo!.dayModel).scn")
+                            CustomSceneView(sceneName: weatherInfo!.dayModel)
                                 .frame(height: 300)
                         }
                     }
