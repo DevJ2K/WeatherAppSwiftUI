@@ -84,43 +84,47 @@ struct TodayView: View {
                     ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
                         let currentHour = getCurrentHour(timezone: cityInfo!.city?.timezone)
                         let i_hour = cityInfo!.hourly!.time[i].suffix(5).prefix(2)
-                        
-                        VStack(spacing: 12) {
-                            if (currentHour == i_hour) {
-                                Text("Now")
-                                    .font(.system(size: 14, weight: .bold))
-                            } else {
-                                Text("\(i_hour)h")
-                                    .font(.system(size: 14, weight: .semibold))
-                            }
-                            if (isNight(currentHour: String(i_hour), sunsetTime: cityInfo?.hourly?.sunset, sunriseTime: cityInfo?.hourly?.sunrise)) {
-                                MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.hourly!.weather_code[i])?.nightModel ?? "")
-                                    .frame(height: 40)
-                            } else {
-                                
-                                MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.hourly!.weather_code[i])?.dayModel ?? "")
-                                    .frame(height: 40)
-                            }
-                            VStack(spacing: 4) {
-                                HStack(spacing: 4) {
-                                    Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
-                                        .font(.system(size: 14))
-                                        .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°")
+                        Group {
+                            VStack(spacing: 12) {
+                                if (currentHour == i_hour) {
+                                    Text("Now")
                                         .font(.system(size: 14, weight: .bold))
-                                        .opacity(0.8)
+                                } else {
+                                    Text("\(i_hour)h")
+                                        .font(.system(size: 14, weight: .semibold))
                                 }
-                                HStack(spacing: 4) {
-                                    Image(systemName: "wind")
-                                        .font(.system(size: 14))
-                                        .opacity(0.8)
-                                    Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
-                                        .font(.system(size: 14, weight: .light))
-                                        .opacity(0.8)
+                                if (isNight(currentHour: String(i_hour), sunsetTime: cityInfo?.hourly?.sunset, sunriseTime: cityInfo?.hourly?.sunrise)) {
+                                    MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.hourly!.weather_code[i])?.nightModel ?? "")
+                                        .frame(height: 40)
+                                } else {
+                                    
+                                    MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.hourly!.weather_code[i])?.dayModel ?? "")
+                                        .frame(height: 40)
+                                }
+                                VStack(spacing: 4) {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
+                                            .font(.system(size: 14))
+                                            .opacity(0.8)
+                                        Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°")
+                                            .font(.system(size: 14, weight: .bold))
+                                            .opacity(0.8)
+                                    }
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "wind")
+                                            .font(.system(size: 14))
+                                            .opacity(0.8)
+                                        Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
+                                            .font(.system(size: 14, weight: .light))
+                                            .opacity(0.8)
+                                    }
                                 }
                             }
+                            .padding()
+//                            if (isSunriseHour(currentHour: i_hour, sunriseTime: cityInfo?.hourly?.sunrise)) {
+//                                                            Text("Yo")
+//                                                        }
                         }
-                        .padding()
 //                        Group {
 //                            
 //                            if (isSunriseHour(currentHour: i_hour, sunriseTime: cityInfo?.hourly?.sunrise)) {

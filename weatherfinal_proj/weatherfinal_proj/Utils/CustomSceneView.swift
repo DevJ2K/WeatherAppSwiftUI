@@ -33,7 +33,7 @@ struct CustomSceneView: UIViewRepresentable {
     
         // Apply fade in effect
         view.scene?.rootNode.opacity = 0.0
-        if (sceneName == "sunny.scn") {
+        if (sceneName == "sunny") {
             
             let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 0.5)
             view.scene?.rootNode.runAction(fadeInAction)
