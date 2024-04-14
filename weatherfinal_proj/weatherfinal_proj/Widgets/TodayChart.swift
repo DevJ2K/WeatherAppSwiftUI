@@ -59,6 +59,8 @@ struct TodayChart: View {
     var cityInfo: CityInfo?
     var hourly: HourlyData?
     @State private var rawSelectedTemperature: ClosedRange<Date>?
+
+    
     var body: some View {
         let chartsData: [ChartHourData] = hourlyToChartsData(hourly: self.hourly)
         
@@ -74,10 +76,10 @@ struct TodayChart: View {
                         y: .value("Temperature", chartHour.temperature)
                     )
                     .interpolationMethod(.catmullRom)
-                    .foregroundStyle(Color.blue.gradient)
+                    .foregroundStyle(getGraphLineColor(cityInfo: cityInfo))
                     .symbol {
                         Circle()
-                            .fill(.indigo)
+                            .fill(getGraphLineColor(cityInfo: cityInfo))
                             .frame(width: 7)
                     }
                     
@@ -86,12 +88,8 @@ struct TodayChart: View {
                         y: .value("Temperature", chartHour.temperature)
                     )
                     .interpolationMethod(.catmullRom)
-//                    .foregroundStyle(LinearGradient(colors: [.blue, .blue.opacity(0.7), .blue.opacity(0.05)], startPoint: .top, endPoint: .bottom))
-                    .foregroundStyle(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo?.current?.weather_code), showSearchBar: false))
+                    .foregroundStyle(LinearGradient(colors: getGradientGraph(cityInfo: cityInfo), startPoint: .top, endPoint: .bottom))
                     .opacity(0.2)
-                    
-                    
-                    
                 }
                 
             }
@@ -135,7 +133,7 @@ struct TodayChart: View {
             }
             .padding()
         }
-        .background(Color.black.opacity(0.5))
+        .background(Color.black.opacity(getOpacityByWeather(cityInfo: cityInfo)))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding()
     }
@@ -157,7 +155,7 @@ struct TodayChart: View {
             "current": {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
-                "is_day": 1,
+                "is_day": 0,
                 "weather_code": 1,
                 "wind_speed_10m": 18.9
             },

@@ -53,6 +53,7 @@ func weeklyToChartsData(weekly: WeeklyData?) -> [ChartDayData] {
 
 struct WeeklyChart: View {
     
+    var cityInfo: CityInfo?
     var weekly: WeeklyData?
 
     var body: some View {
@@ -157,7 +158,7 @@ struct WeeklyChart: View {
             }
             .padding()
         }
-        .background(Color.black.opacity(0.6))
+        .background(Color.black.opacity(getOpacityByWeather(cityInfo: cityInfo)))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding()
     }

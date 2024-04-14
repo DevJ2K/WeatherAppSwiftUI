@@ -13,7 +13,7 @@ struct WeeklyView: View {
     var body: some View {
         ScrollView {
             VStack {
-                WeeklyChart(weekly: cityInfo?.daily)
+                WeeklyChart(cityInfo: cityInfo, weekly: cityInfo?.daily)
                 ScrollViewContent()
             }
         }
@@ -65,7 +65,7 @@ struct WeeklyView: View {
                 }
             }
         }
-        .background(.black.opacity(0.6))
+        .background(.black.opacity(getOpacityByWeather(cityInfo: cityInfo)))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.horizontal)
     }
@@ -121,8 +121,8 @@ struct WeeklyView: View {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
         return WeeklyView(cityInfo: cityInfo)
-            .background(LinearGradient(
-                gradient: Gradient(colors: [.purple.opacity(0.2), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
+            .background(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo.current?.weather_code), showSearchBar: false))
+
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)
