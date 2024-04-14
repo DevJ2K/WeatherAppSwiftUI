@@ -40,6 +40,42 @@ struct TodayView: View {
         return currentHourString
     }
     
+    func isSunsetHour(currentHour: String, sunsetTime: String?) -> Bool {
+        guard let sunsetTime = sunsetTime else { return false }
+        guard let sunsetHour = Int(sunsetTime.suffix(5).prefix(2)) else { return false }
+        guard let currentHourInt = Int(currentHour) else { return false }
+        if (currentHourInt == sunsetHour) {
+            return true
+        }
+        return false
+    }
+    
+    func isSunriseHour(currentHour: String, sunriseTime: String?) -> Bool {
+        guard let sunriseTime = sunriseTime else { return false }
+        guard let sunriseHour = Int(sunriseTime.suffix(5).prefix(2)) else { return false }
+        guard let currentHourInt = Int(currentHour) else { return false }
+        if (currentHourInt == sunriseHour) {
+            return true
+        }
+        return false
+    }
+    
+    
+    func isNight(currentHour: String, sunsetTime: String?, sunriseTime: String?) -> Bool {
+        guard let sunsetTime = sunsetTime else { return false }
+        guard let sunriseTime = sunriseTime else { return false }
+        guard let sunsetHour = Int(sunsetTime.suffix(5).prefix(2)) else { return false }
+        guard let sunriseHour = Int(sunriseTime.suffix(5).prefix(2)) else { return false }
+        guard let currentHourInt = Int(currentHour) else { return false }
+        
+        print("\(currentHour) - \(sunriseHour) - \(sunsetHour)")
+        if (currentHourInt <= sunriseHour || sunsetHour <= currentHourInt) {
+            return true
+        }
+        return false
+        
+    }
+    
     @ViewBuilder
     func ScrollViewContent() -> some View {
         ScrollView(.horizontal) {
@@ -48,6 +84,7 @@ struct TodayView: View {
                     ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
                         let currentHour = getCurrentHour(timezone: cityInfo!.city?.timezone)
                         let i_hour = cityInfo!.hourly!.time[i].suffix(5).prefix(2)
+                        
                         VStack(spacing: 12) {
                             if (currentHour == i_hour) {
                                 Text("Now")
@@ -56,9 +93,14 @@ struct TodayView: View {
                                 Text("\(i_hour)h")
                                     .font(.system(size: 14, weight: .semibold))
                             }
-//                            Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
-                            MiniSceneView(sceneName: "cloudy_night")
-                                .frame(height: 40)
+                            if (isNight(currentHour: String(i_hour), sunsetTime: cityInfo?.hourly?.sunset, sunriseTime: cityInfo?.hourly?.sunrise)) {
+                                MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.hourly!.weather_code[i])?.nightModel ?? "")
+                                    .frame(height: 40)
+                            } else {
+                                
+                                MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.hourly!.weather_code[i])?.dayModel ?? "")
+                                    .frame(height: 40)
+                            }
                             VStack(spacing: 4) {
                                 HStack(spacing: 4) {
                                     Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
@@ -79,7 +121,12 @@ struct TodayView: View {
                             }
                         }
                         .padding()
-//                        .background(.blue.gradient)
+//                        Group {
+//                            
+//                            if (isSunriseHour(currentHour: i_hour, sunriseTime: cityInfo?.hourly?.sunrise)) {
+//                                Text("Yo")
+//                            }
+//                        }
                     }
                 }
             }
@@ -120,13 +167,17 @@ struct TodayView: View {
                                                                                                                                     32.0, 31.8, 31.5, 31.2, 30.9, 30.6, 30.3, 30.0],
                 "weather_code": [2, 61, 61, 61, 61, 61, 45, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 61, 61, 61, 61, 61, 61, 61, 61, 86, 95],
                 "wind_speed_10m": [18.2, 17.3, 18.7, 17.2, 19, 20.1, 21.5, 22.3, 23.6, 24.9, 25.3, 25.8, 26.2, 26.5, 26.7, 26.8, 26.6, 26.3, 26.0, 25.7, 25.4,
-                                                                                                                                                                                                                                                                                                                                         25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0]
+                                                                                                                                                                                                                                                                                                                                         25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0],
+                "sunrise": "2024-04-04T04:09",
+                "sunset": "2024-04-04T18:09",
             },
             "daily": {
                 "time": ["2024-04-04", "2024-04-05", "2024-04-06"],
                 "weather_code": [80, 61, 3],
                 "temperature_2m_max": [18.4, 17.2, 24.9],
-                "temperature_2m_min": [12.0, 13.0, 12.1]
+                "temperature_2m_min": [12.0, 13.0, 12.1],
+                "sunset": ["2024-04-04T04:09", "2024-04-05T04:09", "2024-04-04T06:09"],
+                "sunrise": ["2024-04-04T18:09", "2024-04-05T18:09", "2024-04-06T18:09"],
             }
         }
         """

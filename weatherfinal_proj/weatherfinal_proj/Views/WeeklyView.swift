@@ -37,8 +37,7 @@ struct WeeklyView: View {
                                     .font(.system(size: 14, weight: .semibold))
                                 
                             }
-//                            Text("\(getWeatherDescription(weather_code: cityInfo!.hourly!.weather_code[i])?.dayDescription ?? "")")
-                            MiniSceneView(sceneName: "cloudy_night")
+                            MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.daily!.weather_code[i])?.dayModel ?? "")
                                 .frame(height: 40)
                             VStack(spacing: 4) {
                                 HStack(spacing: 4) {
@@ -107,7 +106,9 @@ struct WeeklyView: View {
                 "time": ["2024-04-04", "2024-04-05", "2024-04-06", "2024-04-07", "2024-04-08", "2024-04-09", "2024-04-10"],
                 "weather_code": [80, 61, 3, 45, 80, 45, 45],
                 "temperature_2m_max": [18.4, 17.2, 24.9, 16.4, 14.6, 17.7, 29.0],
-                "temperature_2m_min": [12.0, 13.0, 12.1, 12, 5.0, -3, 23.8]
+                "temperature_2m_min": [12.0, 13.0, 12.1, 12, 5.0, -3, 23.8],
+                "sunset": ["2024-04-04T04:09", "2024-04-05T04:09", "2024-04-04T06:09"],
+                "sunrise": ["2024-04-04T18:09", "2024-04-05T18:09", "2024-04-06T18:09"],
             }
         
         }

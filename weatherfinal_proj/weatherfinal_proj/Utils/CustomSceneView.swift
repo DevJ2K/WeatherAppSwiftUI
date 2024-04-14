@@ -19,6 +19,10 @@ struct CustomSceneView: UIViewRepresentable {
         var scene = get3DModel(sceneName: sceneName)
         if (scene == nil) {
             scene = .init(named: "\(sceneName).scn")
+            if (scene == nil) {
+                view.backgroundColor = .clear
+                return view
+            }
         }
         
 //        view.allowsCameraControl = true

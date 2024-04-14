@@ -54,13 +54,17 @@ struct HourlyData: Codable {
     var temperature_2m: Array<Double>
     var weather_code: Array<Int8>
     var wind_speed_10m: Array<Double>
+    var sunrise: String?
+    var sunset: String?
 }
 
 struct WeeklyData: Codable {
     var time: Array<String>
     var weather_code: Array<Int8>
-    var temperature_2m_max: Array<Double>
     var temperature_2m_min: Array<Double>
+    var temperature_2m_max: Array<Double>
+    var sunrise: Array<String>
+    var sunset: Array<String>
 }
 
 
@@ -245,30 +249,8 @@ func getOpacityByWeather(cityInfo: CityInfo?) -> Double {
 }
 
 func fetchCityInfo(city: City) async -> CityInfo? {
-    //    var currentTabUrlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&current=temperature_2m,is_day,weather_code,wind_speed_10m"
-    //    var todayTabUrlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&hourly=temperature_2m,weather_code,wind_speed_10m&forecast_days=1"
-    //    var weeklyTabUrlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&daily=weather_code,temperature_2m_max,temperature_2m_min"
-    //
-    //    if (city.timezone != nil) {
-    //        currentTabUrlString += "&timezone=\(city.timezone!)"
-    //        todayTabUrlString += "&timezone=\(city.timezone!)"
-    //        weeklyTabUrlString += "&timezone=\(city.timezone!)"
-    //    }
-    //
-    //    guard let currentTabUrl = URL(string: currentTabUrlString) else {
-    //        print("CURRENT TAB : This request has failed please try with an other URL...")
-    //        return nil
-    //    }
-    //    guard let todayTabUrl = URL(string: todayTabUrlString) else {
-    //        print("TODAY TAB : This request has failed please try with an other URL...")
-    //        return nil
-    //    }
-    //    guard let weeklyTabUrl = URL(string: weeklyTabUrlString) else {
-    //        print("WEEKLY TAB : This request has failed please try with an other URL...")
-    //        return nil
-    //    }
     var cityInfo = CityInfo(city: city)
-    var urlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&current=temperature_2m,relative_humidity_2m,precipitation_probability,is_day,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min"
+    var urlString = "https://api.open-meteo.com/v1/forecast?latitude=\(city.latitude)&longitude=\(city.longitude)&current=temperature_2m,relative_humidity_2m,precipitation_probability,is_day,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset"
     if (city.timezone != nil) {
         urlString += "&timezone=\(city.timezone!)"
     }
@@ -276,6 +258,7 @@ func fetchCityInfo(city: City) async -> CityInfo? {
         print("This request has failed please try with an other URL...")
         return nil
     }
+    print(urlString)
     do {
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
@@ -287,6 +270,9 @@ func fetchCityInfo(city: City) async -> CityInfo? {
         cityInfo.current = decodedResponse.current
         cityInfo.hourly = decodedResponse.hourly
         cityInfo.daily = decodedResponse.daily
+        
+        cityInfo.hourly?.sunrise = cityInfo.daily?.sunrise[0]
+        cityInfo.hourly?.sunset = cityInfo.daily?.sunset[0]
         //        print("HERE !")
         return cityInfo
         
