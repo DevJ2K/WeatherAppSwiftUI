@@ -71,6 +71,8 @@ struct WeatherInfo {
     let nightModel: String
     let backgroundDay: LinearGradient
     let backgroundNight: LinearGradient
+//    let dayOpacity: Double
+//    let nightOpacity: Double
 }
 
 struct WeatherMap {
@@ -93,52 +95,50 @@ struct WeatherMap {
         
         "55": WeatherInfo(dayDescription: "Heavy Drizzle", nightDescription: "Heavy Drizzle", dayModel: "heavy_rain", nightModel: "heavy_rain", backgroundDay: LinearGradient(colors: [.gray.opacity(0.3), .gray.opacity(0.1)], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
-        "56": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "56": WeatherInfo(dayDescription: "Light Freezing Drizzle", nightDescription: "Light Freezing Drizzle", dayModel: "light_rain", nightModel: "light_rain", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.blue.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
-        "57": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "57": WeatherInfo(dayDescription: "Freezing Drizzle", nightDescription: "Freezing Drizzle", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
-        "61": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "61": WeatherInfo(dayDescription: "Light Rain", nightDescription: "Light Rain", dayModel: "light_rain", nightModel: "light_rain", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
         "63": WeatherInfo(dayDescription: "Rain", nightDescription: "Rain", dayModel: "light_rain", nightModel: "light_rain", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "65": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "65": WeatherInfo(dayDescription: "Heavy Rain", nightDescription: "Heavy Rain", dayModel: "heavy_rain", nightModel: "heavy_rain", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "66": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "66": WeatherInfo(dayDescription: "Light Freezing Rain", nightDescription: "Light Freezing Rain", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "67": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "67": WeatherInfo(dayDescription: "Freezing Rain", nightDescription: "Freezing Rain", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "71": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "71": WeatherInfo(dayDescription: "Light Snow", nightDescription: "Light Snow", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "73": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "73": WeatherInfo(dayDescription: "Snow", nightDescription: "Snow", dayModel: "heavy_snow", nightModel: "heavy_snow", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "75": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "75": WeatherInfo(dayDescription: "Heavy Snow", nightDescription: "Heavy Snow", dayModel: "heavy_snow", nightModel: "heavy_snow", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
              
-        "77": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
-//             
-//        "80": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
-//        
+        "77": WeatherInfo(dayDescription: "Snow Grains", nightDescription: "Snow Grains", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+ 
         
         "80": WeatherInfo(dayDescription: "Light Showers", nightDescription: "Light Showers", dayModel: "light_rain", nightModel: "light_rain", backgroundDay: LinearGradient(colors: [.indigo.opacity(0.8), .indigo.opacity(0.4)], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
                     
-        "81": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "81": WeatherInfo(dayDescription: "Showers", nightDescription: "Showers", dayModel: "light_rain", nightModel: "light_rain", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
                     
-        "82": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "82": WeatherInfo(dayDescription: "Heavy Showers", nightDescription: "Heavy Showers", dayModel: "heavy_rain", nightModel: "heavy_rain", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
                     
-        "85": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "85": WeatherInfo(dayDescription: "Light Snow Showers", nightDescription: "Light Snow Showers", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
                     
-        "86": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "86": WeatherInfo(dayDescription: "Snow Showers", nightDescription: "Snow Showers", dayModel: "snowfall", nightModel: "snowfall", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
                     
-        "95": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "95": WeatherInfo(dayDescription: "Thunderstorm", nightDescription: "Thunderstorm", dayModel: "light_thunderstorm", nightModel: "light_thunderstorm", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
                          
-        "96": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "96": WeatherInfo(dayDescription: "Light Thunderstorms With Hail", nightDescription: "Light Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
                          
-        "99": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
+        "99": WeatherInfo(dayDescription: "Light Thunderstorms With Hail", nightDescription: "Light Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", backgroundDay: LinearGradient(colors: [.yellow, .orange], startPoint: .top, endPoint: .bottom), backgroundNight: LinearGradient(colors: [.indigo.opacity(0.7), .blue], startPoint: .top, endPoint: .bottom)),
         
     
 //        "0": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", backgroundDay: "http://openweathermap.org/img/wn/01d@2x.png", backgroundNight: "http://openweathermap.org/img/wn/01n@2x.png"),

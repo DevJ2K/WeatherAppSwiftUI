@@ -10,6 +10,23 @@ import SwiftUI
 struct CurrentlyView: View {
     var cityInfo: CityInfo?
     
+    func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
+        print(":::::")
+        print(cityInfo?.current?.is_day ?? 3)
+        if (showSearchBar) {
+            return LinearGradient(colors: [Color.black], startPoint: .center, endPoint: .center)
+        } else if (weatherInfo != nil) {
+            if (cityInfo?.current?.is_day == 0) {
+                return weatherInfo!.backgroundNight
+            } else {
+                return weatherInfo!.backgroundDay
+            }
+        } else {
+            return LinearGradient(
+                gradient: Gradient(colors: [.purple.opacity(0.2), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+        }
+    }
+    
     var body: some View {
         let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: cityInfo?.current?.weather_code ?? -1)
         if (cityInfo?.current != nil) {
@@ -47,6 +64,7 @@ struct CurrentlyView: View {
                 //        .background(LinearGradient(colors: [Color.indigo.opacity(0.2), Color.indigo.opacity(0.6)], startPoint: .top, endPoint: .bottom))
                 .ignoresSafeArea(.all)
             }
+            .background(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo!.current!.weather_code), showSearchBar: false))
         } else {
             Text("Unable to display this data. Please try again.")
         }
@@ -54,7 +72,7 @@ struct CurrentlyView: View {
 }
 
 #Preview {
-    return ContentView()
+//    return ContentView()
     let jsonString = """
         {
             "city": {
