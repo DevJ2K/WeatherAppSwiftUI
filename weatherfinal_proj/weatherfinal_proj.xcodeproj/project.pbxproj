@@ -19,16 +19,18 @@
 		E43FD4342BCD2BB200EC61A3 /* cloudy_fog.scn in Resources */ = {isa = PBXBuildFile; fileRef = E43FD4332BCD2BB200EC61A3 /* cloudy_fog.scn */; };
 		E43FD4362BCD2CE600EC61A3 /* solo_snow.scn in Resources */ = {isa = PBXBuildFile; fileRef = E43FD4352BCD2CE600EC61A3 /* solo_snow.scn */; };
 		E43FD4382BCD5CA600EC61A3 /* heavy_rain.scn in Resources */ = {isa = PBXBuildFile; fileRef = E43FD4372BCD5CA600EC61A3 /* heavy_rain.scn */; };
+		E43FD43A2BCD692900EC61A3 /* night_snowfall.scn in Resources */ = {isa = PBXBuildFile; fileRef = E43FD4392BCD692900EC61A3 /* night_snowfall.scn */; };
+		E43FD43C2BCD6A0D00EC61A3 /* snowfall.scn in Resources */ = {isa = PBXBuildFile; fileRef = E43FD43B2BCD6A0D00EC61A3 /* snowfall.scn */; };
 		E45D43C82BC4317F00F43519 /* CustomSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45D43C72BC4317F00F43519 /* CustomSceneView.swift */; };
 		E45D43ED2BC4355200F43519 /* clear_moon.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43EC2BC4355200F43519 /* clear_moon.scn */; };
 		E45D43EF2BC435A500F43519 /* cloudy_night.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43EE2BC435A500F43519 /* cloudy_night.scn */; };
 		E45D43F12BC435B800F43519 /* cloudy.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43F02BC435B800F43519 /* cloudy.scn */; };
 		E45D43F32BC435E500F43519 /* angry_rain.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43F22BC435E500F43519 /* angry_rain.scn */; };
-		E45D43F52BC4361200F43519 /* heavy_snow.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43F42BC4361200F43519 /* heavy_snow.scn */; };
+		E45D43F52BC4361200F43519 /* snowflake.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43F42BC4361200F43519 /* snowflake.scn */; };
 		E45D43F72BC4365400F43519 /* light_rain.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43F62BC4365400F43519 /* light_rain.scn */; };
 		E45D43F92BC4366100F43519 /* light_thunderstorm.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43F82BC4366100F43519 /* light_thunderstorm.scn */; };
 		E45D43FB2BC4369100F43519 /* partly_cloudy.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43FA2BC4369100F43519 /* partly_cloudy.scn */; };
-		E45D43FD2BC436A000F43519 /* snowfall.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43FC2BC436A000F43519 /* snowfall.scn */; };
+		E45D43FD2BC436A000F43519 /* heavy_snow.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43FC2BC436A000F43519 /* heavy_snow.scn */; };
 		E45D43FF2BC436AD00F43519 /* sunny.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D43FE2BC436AD00F43519 /* sunny.scn */; };
 		E45D44012BC436B900F43519 /* thunder_cloud.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D44002BC436B900F43519 /* thunder_cloud.scn */; };
 		E45D44032BC436C800F43519 /* thunderstorm_with_hail.scn in Resources */ = {isa = PBXBuildFile; fileRef = E45D44022BC436C800F43519 /* thunderstorm_with_hail.scn */; };
@@ -57,16 +59,18 @@
 		E43FD4332BCD2BB200EC61A3 /* cloudy_fog.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cloudy_fog.scn; sourceTree = "<group>"; };
 		E43FD4352BCD2CE600EC61A3 /* solo_snow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = solo_snow.scn; sourceTree = "<group>"; };
 		E43FD4372BCD5CA600EC61A3 /* heavy_rain.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = heavy_rain.scn; sourceTree = "<group>"; };
+		E43FD4392BCD692900EC61A3 /* night_snowfall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = night_snowfall.scn; sourceTree = "<group>"; };
+		E43FD43B2BCD6A0D00EC61A3 /* snowfall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = snowfall.scn; sourceTree = "<group>"; };
 		E45D43C72BC4317F00F43519 /* CustomSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSceneView.swift; sourceTree = "<group>"; };
 		E45D43EC2BC4355200F43519 /* clear_moon.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = clear_moon.scn; sourceTree = "<group>"; };
 		E45D43EE2BC435A500F43519 /* cloudy_night.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cloudy_night.scn; sourceTree = "<group>"; };
 		E45D43F02BC435B800F43519 /* cloudy.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cloudy.scn; sourceTree = "<group>"; };
 		E45D43F22BC435E500F43519 /* angry_rain.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = angry_rain.scn; sourceTree = "<group>"; };
-		E45D43F42BC4361200F43519 /* heavy_snow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = heavy_snow.scn; sourceTree = "<group>"; };
+		E45D43F42BC4361200F43519 /* snowflake.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = snowflake.scn; sourceTree = "<group>"; };
 		E45D43F62BC4365400F43519 /* light_rain.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = light_rain.scn; sourceTree = "<group>"; };
 		E45D43F82BC4366100F43519 /* light_thunderstorm.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = light_thunderstorm.scn; sourceTree = "<group>"; };
 		E45D43FA2BC4369100F43519 /* partly_cloudy.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = partly_cloudy.scn; sourceTree = "<group>"; };
-		E45D43FC2BC436A000F43519 /* snowfall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = snowfall.scn; sourceTree = "<group>"; };
+		E45D43FC2BC436A000F43519 /* heavy_snow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = heavy_snow.scn; sourceTree = "<group>"; };
 		E45D43FE2BC436AD00F43519 /* sunny.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sunny.scn; sourceTree = "<group>"; };
 		E45D44002BC436B900F43519 /* thunder_cloud.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = thunder_cloud.scn; sourceTree = "<group>"; };
 		E45D44022BC436C800F43519 /* thunderstorm_with_hail.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = thunderstorm_with_hail.scn; sourceTree = "<group>"; };
@@ -152,12 +156,14 @@
 				E43FD4332BCD2BB200EC61A3 /* cloudy_fog.scn */,
 				E45D43F22BC435E500F43519 /* angry_rain.scn */,
 				E43FD4372BCD5CA600EC61A3 /* heavy_rain.scn */,
-				E45D43F42BC4361200F43519 /* heavy_snow.scn */,
+				E45D43F42BC4361200F43519 /* snowflake.scn */,
 				E43FD4352BCD2CE600EC61A3 /* solo_snow.scn */,
 				E45D43F62BC4365400F43519 /* light_rain.scn */,
 				E45D43F82BC4366100F43519 /* light_thunderstorm.scn */,
 				E45D43FA2BC4369100F43519 /* partly_cloudy.scn */,
-				E45D43FC2BC436A000F43519 /* snowfall.scn */,
+				E45D43FC2BC436A000F43519 /* heavy_snow.scn */,
+				E43FD43B2BCD6A0D00EC61A3 /* snowfall.scn */,
+				E43FD4392BCD692900EC61A3 /* night_snowfall.scn */,
 				E45D43FE2BC436AD00F43519 /* sunny.scn */,
 				E45D44002BC436B900F43519 /* thunder_cloud.scn */,
 				E45D44022BC436C800F43519 /* thunderstorm_with_hail.scn */,
@@ -266,17 +272,19 @@
 				E45D43F32BC435E500F43519 /* angry_rain.scn in Resources */,
 				E45D44012BC436B900F43519 /* thunder_cloud.scn in Resources */,
 				E43FD4342BCD2BB200EC61A3 /* cloudy_fog.scn in Resources */,
+				E43FD43A2BCD692900EC61A3 /* night_snowfall.scn in Resources */,
 				E45D44032BC436C800F43519 /* thunderstorm_with_hail.scn in Resources */,
 				E45D43EF2BC435A500F43519 /* cloudy_night.scn in Resources */,
-				E45D43FD2BC436A000F43519 /* snowfall.scn in Resources */,
+				E45D43FD2BC436A000F43519 /* heavy_snow.scn in Resources */,
 				E45D43FF2BC436AD00F43519 /* sunny.scn in Resources */,
 				E43FD4362BCD2CE600EC61A3 /* solo_snow.scn in Resources */,
-				E45D43F52BC4361200F43519 /* heavy_snow.scn in Resources */,
+				E45D43F52BC4361200F43519 /* snowflake.scn in Resources */,
 				E45D43F12BC435B800F43519 /* cloudy.scn in Resources */,
 				E42AA0EC2BB6DC700091B4C5 /* Preview Assets.xcassets in Resources */,
 				E42AA0E92BB6DC700091B4C5 /* Assets.xcassets in Resources */,
 				E45D43F92BC4366100F43519 /* light_thunderstorm.scn in Resources */,
 				E45D43FB2BC4369100F43519 /* partly_cloudy.scn in Resources */,
+				E43FD43C2BCD6A0D00EC61A3 /* snowfall.scn in Resources */,
 				E45D43ED2BC4355200F43519 /* clear_moon.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
