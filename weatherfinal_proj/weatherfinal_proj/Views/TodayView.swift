@@ -11,11 +11,15 @@ struct TodayView: View {
     var cityInfo: CityInfo?
     
     var body: some View {
-        ScrollView {
-            VStack {
-                TodayChart(cityInfo: cityInfo, hourly: cityInfo?.hourly)
-                ScrollViewContent()
+        if (cityInfo != nil) {
+            ScrollView {
+                VStack {
+                    TodayChart(cityInfo: cityInfo, hourly: cityInfo?.hourly)
+                    ScrollViewContent()
+                }
             }
+        } else {
+            Text("Unable to display the data. Please try again.")
         }
     }
     

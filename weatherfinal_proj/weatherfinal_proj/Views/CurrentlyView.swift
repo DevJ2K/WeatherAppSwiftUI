@@ -49,7 +49,7 @@ struct CurrentlyView: View {
             }
 //            .background(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo?.current?.weather_code), showSearchBar: false))
         } else {
-            Text("Unable to display this data. Please try again.")
+            Text("Unable to display the data. Please try again.")
         }
     }
 }

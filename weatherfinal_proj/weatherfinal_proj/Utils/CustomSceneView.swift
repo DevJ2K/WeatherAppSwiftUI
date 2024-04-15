@@ -145,13 +145,17 @@ struct CustomSceneView: UIViewRepresentable {
                 "time": ["2024-04-04T00:00", "2024-04-04T01:00", "2024-04-04T02:00", "2024-04-04T03:00"],
                 "temperature_2m": [13.0, 12.8, 13.3, 13.2],
                 "weather_code": [2, 61, 61, 61],
-                "wind_speed_10m": [18.2, 17.3, 18.7, 17.2]
+                "wind_speed_10m": [18.2, 17.3, 18.7, 17.2],
+                "sunrise": "2024-04-04T04:09",
+                "sunset": "2024-04-04T18:09",
             },
             "daily": {
                 "time": ["2024-04-04", "2024-04-05", "2024-04-06"],
                 "weather_code": [80, 61, 3],
                 "temperature_2m_max": [18.4, 17.2, 24.9],
-                "temperature_2m_min": [12.0, 13.0, 12.1]
+                "temperature_2m_min": [12.0, 13.0, 12.1],
+                "sunrise": ["2024-04-04T04:09"],
+                "sunset": ["2024-04-04T18:09"],
             }
         }
         """

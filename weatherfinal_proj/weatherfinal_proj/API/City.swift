@@ -196,8 +196,6 @@ func get3DModel(sceneName: String) -> SCNScene? {
 
 
 func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
-    print(":::::")
-//    print(cityInfo?.current?.is_day ?? 3)
     if (showSearchBar) {
         return LinearGradient(colors: [Color.black], startPoint: .center, endPoint: .center)
     } else if (weatherInfo != nil) {
@@ -258,7 +256,7 @@ func fetchCityInfo(city: City) async -> CityInfo? {
         print("This request has failed please try with an other URL...")
         return nil
     }
-    print(urlString)
+//    print(urlString)
     do {
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
@@ -289,7 +287,7 @@ func fetchCity(name: String) async -> [City] {
         LocationManager.shared.isFetchingCityList = true
     }
     let urlString = "https://geocoding-api.open-meteo.com/v1/search?name=\(name)&count=5&language=en&format=json"
-    print(urlString)
+//    print(urlString)
     // Create URL
     guard let url = URL(string: urlString) else {
         print("This request has failed please try with an other URL...")

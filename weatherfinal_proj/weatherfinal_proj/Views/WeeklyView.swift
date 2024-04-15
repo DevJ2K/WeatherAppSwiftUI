@@ -11,11 +11,15 @@ struct WeeklyView: View {
     var cityInfo: CityInfo?
     
     var body: some View {
-        ScrollView {
-            VStack {
-                WeeklyChart(cityInfo: cityInfo, weekly: cityInfo?.daily)
-                ScrollViewContent()
+        if (cityInfo != nil) {
+            ScrollView {
+                VStack {
+                    WeeklyChart(cityInfo: cityInfo, weekly: cityInfo?.daily)
+                    ScrollViewContent()
+                }
             }
+        } else {
+            Text("Unable to display the data. Please try again.")
         }
     }
     

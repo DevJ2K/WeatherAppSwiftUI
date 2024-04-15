@@ -38,7 +38,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
-        print("Geolocation : \(userLocStatus.debugDescription)")
+//        print("Geolocation : \(userLocStatus.debugDescription)")
         if (userLocStatus != nil) {
             if (userLocStatus == .authorizedWhenInUse || userLocStatus == .authorizedAlways) {
                 locationManager.startUpdatingLocation()
@@ -114,7 +114,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         DispatchQueue.main.async {
             self.isFetchingCityInfo = true
         }
-        print("STARTING FILL USER LOCATION !")
+//        print("STARTING FILL USER LOCATION !")
         guard let latestLocation = locations.first else { return }
         locationManager.stopUpdatingLocation()
         
@@ -139,8 +139,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 if let cityTimezone = placemark.timeZone {
                     self.cityLocation?.timezone = cityTimezone.identifier
                 }
-                print(placemark.country! + " | " + placemark.administrativeArea! + " | " + placemark.locality! + " | " + placemark.timeZone!.identifier)
-                print("ENDING FETCHING REAL POS INFO :")
+//                print(placemark.country! + " | " + placemark.administrativeArea! + " | " + placemark.locality! + " | " + placemark.timeZone!.identifier)
+//                print("ENDING FETCHING REAL POS INFO :")
                 
                 Task {
                     let fetchedCityInfo = await fetchCityInfo(city: self.cityLocation!)
@@ -151,10 +151,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 //                        print(self.cityInfo ?? "cityInfo nil")
                     }
                 }
-                print("========================================")
+//                print("========================================")
             }
         }
-        print("ENDING FILL USER LOCATION !")
+//        print("ENDING FILL USER LOCATION !")
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
