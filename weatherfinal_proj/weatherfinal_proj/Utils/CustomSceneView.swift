@@ -13,6 +13,8 @@ struct CustomSceneView: UIViewRepresentable {
     let sceneName: String
     let toBloomModel = ["crescent_moon", "stars_001", "stars_002", "stars_003", "stars_004", "moon_night"]
     
+    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"]
+    
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
 //        print("MODEL : \(sceneName)")
@@ -37,55 +39,27 @@ struct CustomSceneView: UIViewRepresentable {
             
             let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 0.5)
             view.scene?.rootNode.runAction(fadeInAction)
+            for elt in sunshine {
+                if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
+                    node.filters = addBloom(intensity: 0.2, radius: 5.0)
+                    scaleAnimation(node: node, from: 1.0, to: 0.8)
+                }
+            }
+            if let sun = view.scene?.rootNode.childNode(withName: "Sphere_001", recursively: true) {
+                sun.filters = addBloom(intensity: nil, radius: nil)
+                scaleAnimation(node: sun, from: 1.05, to: 1.1)
+            }
         } else {
             let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.0)
             view.scene?.rootNode.runAction(fadeInAction)
         }
-
-//        view.pointOfView?.position.y -= 0.1
-//        view.pointOfView = view.scene?.rootNode.childNode(withName: "camera", recursively: true)
-
+    
         
-        
-//        // Access the scene
-//        if let scene = view.scene {
-//            // Find the camera node named "camera"
-//            if let cameraNode = scene.rootNode.childNode(withName: "camera", recursively: true) {
-//                // Set the point of view to the camera node
-//                view.pointOfView = cameraNode
-//            } else {
-//                print("Camera node not found in the scene.")
-//            }
-//        } else {
-//            print("Scene not found in the scene view.")
-//        }
-        
-        //        let cameraNode = SCNNode()
-        //        cameraNode.camera = SCNCamera()
-        //        scene?.rootNode.addChildNode(cameraNode)
-        //        view.pointOfView = cameraNode
-        //
-        //        cameraNode.position = SCNVector3(0, -1.55, 0)
-        //        cameraNode.eulerAngles = SCNVector3(52, 0, 0)
-        //
-        //        SCNTransaction.begin()
-        //        SCNTransaction.animationDuration = 5
-        // Perform the initial scaling
-//        print(scene?.rootNode.name ?? "HERE")
         for model in toBloomModel {
-            view.scene?.rootNode.childNode(withName: model, recursively: true)?.filters = addBloom()
-        }
-        if let node = view.scene?.rootNode.childNode(withName: "Cylinder_039", recursively: true) {
-            node.scale = SCNVector3(1, 1, 1)
-            // Start loop animation
-//            startLoopAnimation(node)
+            view.scene?.rootNode.childNode(withName: model, recursively: true)?.filters = addBloom(intensity: 0.1, radius: 6.0)
         }
         
-        view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true)?.filters = addBloom()
-        view.scene?.rootNode.childNode(withName: "Sphere_001", recursively: true)?.filters = addBloom()
-        
-        //        cameraNode.position = SCNVector3(0, -1.05, 0)
-        //        SCNTransaction.commit()
+        view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true)?.filters = addBloom(intensity: nil, radius: nil)
         
         return view
         
@@ -93,6 +67,16 @@ struct CustomSceneView: UIViewRepresentable {
     
     func updateUIView(_ uiView: SCNView, context: Context) {
         
+    }
+    
+    private func scaleAnimation(node: SCNNode, from: Double, to: Double) {
+        let scaleAction = SCNAction.scale(to: from, duration: 2)
+        scaleAction.timingMode = .easeInEaseOut
+        let reverseScaleAction = SCNAction.scale(to: to, duration: 2)
+        reverseScaleAction.timingMode = .easeInEaseOut
+        let disappearAndReverseScale = SCNAction.sequence([scaleAction, reverseScaleAction])
+        let repeatAction = SCNAction.repeatForever(disappearAndReverseScale)
+        node.runAction(repeatAction)
     }
     
     private func startLoopAnimation(_ node: SCNNode) {
@@ -111,10 +95,10 @@ struct CustomSceneView: UIViewRepresentable {
         node.runAction(repeatAction)
     }
     
-    func addBloom() -> [CIFilter]? {
+    func addBloom(intensity: Double?, radius: Double?) -> [CIFilter]? {
         let bloomFilter = CIFilter(name:"CIBloom")!
-        bloomFilter.setValue(0.5, forKey: "inputIntensity")
-        bloomFilter.setValue(10.0, forKey: "inputRadius")
+        bloomFilter.setValue(intensity ?? 0.5, forKey: "inputIntensity")
+        bloomFilter.setValue(radius ?? 10.0, forKey: "inputRadius")
 
         return [bloomFilter]
     }
@@ -138,7 +122,7 @@ struct CustomSceneView: UIViewRepresentable {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
                 "is_day": 1,
-                "weather_code": 80,
+                "weather_code": 1,
                 "wind_speed_10m": 18.9
             },
             "hourly": {
@@ -168,6 +152,7 @@ struct CustomSceneView: UIViewRepresentable {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
         return CurrentlyView(cityInfo: cityInfo)
+            .background(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo.current?.weather_code), showSearchBar: false))
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)

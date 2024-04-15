@@ -102,6 +102,7 @@ struct CurrentlyView: View {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
         return CurrentlyView(cityInfo: cityInfo)
+            .background(getRealBackground(cityInfo: cityInfo, weatherInfo: getWeatherInfo(weather_code: cityInfo.current?.weather_code), showSearchBar: false))
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)

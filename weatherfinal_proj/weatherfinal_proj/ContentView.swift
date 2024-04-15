@@ -153,7 +153,7 @@ struct ContentView: View {
                 //                .background(Color.white.opacity(0.1))
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white.opacity(0.1))
+                        .fill(Color.black.opacity(0.1))
                         .shadow(color: .black, radius: 6, x: 2, y: 2)
                     
                 )
