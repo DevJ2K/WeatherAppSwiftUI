@@ -11,7 +11,7 @@ import SceneKit
 struct MiniSceneView: UIViewRepresentable {
 //    @Binding var scene: SCNScene?
     let sceneName: String
-    let toBloomModel = ["crescent_moon", "stars_001", "stars_002", "stars_003", "stars_004", "moon_night"]
+    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"]
     
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
@@ -33,7 +33,7 @@ struct MiniSceneView: UIViewRepresentable {
         if (sceneName == "sunny") {
             let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 0.5)
             view.scene?.rootNode.runAction(fadeInAction)
-            for elt in ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"] {
+            for elt in sunshine {
                 if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
                     node.filters = addBloom(intensity: 0.2, radius: 5.0)
                 }
@@ -189,14 +189,14 @@ struct MiniSceneView: UIViewRepresentable {
             "hourly": {
                 "time": ["2024-04-04T00:00", "2024-04-04T01:00", "2024-04-04T02:00", "2024-04-04T03:00"],
                 "temperature_2m": [13.0, 12.8, 13.3, 13.2],
-                "weather_code": [2, 1, 61, 61],
+                "weather_code": [2, 1, 1, 61],
                 "wind_speed_10m": [18.2, 17.3, 18.7, 17.2],
                 "sunrise": "2024-04-04T04:09",
                 "sunset": "2024-04-04T18:09",
             },
             "daily": {
                 "time": ["2024-04-04", "2024-04-05", "2024-04-06"],
-                "weather_code": [80, 61, 3],
+                "weather_code": [80, 61, 61],
                 "temperature_2m_max": [18.4, 17.2, 24.9],
                 "temperature_2m_min": [12.0, 13.0, 12.1],
                 "sunrise": ["2024-04-04T04:09"],
