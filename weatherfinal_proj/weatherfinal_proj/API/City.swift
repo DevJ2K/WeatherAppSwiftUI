@@ -140,7 +140,7 @@ func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearc
         }
     } else {
         return LinearGradient(
-            gradient: Gradient(colors: [.purple.opacity(0.2), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+            gradient: Gradient(colors: [.purple.opacity(0.7), .indigo.opacity(0.9)]), startPoint: .top, endPoint: .bottom)
     }
 }
 
