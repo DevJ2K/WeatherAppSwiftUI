@@ -14,7 +14,7 @@ struct WeatherMap {
     
         "1": WeatherInfo(dayDescription: "Mainly Sunny", nightDescription: "Mainly Clear", dayModel: "sunny", nightModel: "clear_moon", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.blue, .blue.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.1627, green: 0.7392, blue: 1.0)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
         "3": WeatherInfo(dayDescription: "Cloudy", nightDescription: "Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
@@ -127,6 +127,12 @@ struct CustomSceneView: UIViewRepresentable {
                 moonAnimation(node: moon_node)
             }
             view.scene?.rootNode.runAction(fadeInAction)
+        } else if (sceneName == "cloudy") {
+            let fadeInAction = SCNAction.fadeOpacity(by: 1, duration: 0.4)
+            view.scene?.rootNode.runAction(fadeInAction)
+            if let cloud_node = view.scene?.rootNode.childNode(withName: "clear_cloud", recursively: true) {
+                scaleAnimation(node: cloud_node, from: 1.387, to: 1.45)
+            }
         }
         else {
             let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.0)
@@ -209,8 +215,8 @@ struct CustomSceneView: UIViewRepresentable {
             "current": {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
-                "is_day": 0,
-                "weather_code": 0,
+                "is_day": 1,
+                "weather_code": 2,
                 "wind_speed_10m": 18.9
             },
             "hourly": {
