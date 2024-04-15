@@ -16,17 +16,17 @@ struct WeatherMap {
         
         "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "partly_cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.3, green: 0.35, blue: 1.0)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "3": WeatherInfo(dayDescription: "Cloudy", nightDescription: "Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.1627, green: 0.7392, blue: 1.0)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "3": WeatherInfo(dayDescription: "Cloudy", nightDescription: "Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.1627, green: 0.7392, blue: 1.0)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.4)], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "45":  WeatherInfo(dayDescription: "Foggy", nightDescription: "Foggy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "45":  WeatherInfo(dayDescription: "Foggy", nightDescription: "Foggy", dayModel: "cloudy", nightModel: "cloudy_fog", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.gray.opacity(0.5), .gray.opacity(0.3)], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "48": WeatherInfo(dayDescription: "Rime Fog", nightDescription: "Rime Fog", dayModel: "thunder_cloud", nightModel: "thunder_cloud", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "48": WeatherInfo(dayDescription: "Rime Fog", nightDescription: "Rime Fog", dayModel: "solo_snow", nightModel: "solo_snow", colorDay: [.white, .cyan], colorNight: [ .gray.opacity(0.3), .blue.opacity(0.6)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "51": WeatherInfo(dayDescription: "Light Drizzle", nightDescription: "Light Drizzle", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "51": WeatherInfo(dayDescription: "Light Drizzle", nightDescription: "Light Drizzle", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.white.opacity(0.7), .white.opacity(0.5)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
         "53": WeatherInfo(dayDescription: "Drizzle", nightDescription: "Drizzle", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.gray, .gray.opacity(0.5)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "55": WeatherInfo(dayDescription: "Heavy Drizzle", nightDescription: "Heavy Drizzle", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.gray.opacity(0.3), .gray.opacity(0.1)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "55": WeatherInfo(dayDescription: "Heavy Drizzle", nightDescription: "Heavy Drizzle", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.gray.opacity(0.7), .blue], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
         "56": WeatherInfo(dayDescription: "Light Freezing Drizzle", nightDescription: "Light Freezing Drizzle", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
@@ -125,7 +125,7 @@ struct CustomSceneView: UIViewRepresentable {
                 moon_node.scale.z = 0.12
 //                print("HEREE")
                 moon_node.filters = addBloom(intensity: 0.5, radius: 7.0)
-                moonAnimation(node: moon_node)
+                rotationAnimation(node: moon_node)
             }
         } else if (sceneName == "cloudy") {
             opacityDuration = 0.4
@@ -134,7 +134,15 @@ struct CustomSceneView: UIViewRepresentable {
                 scaleAnimation(node: cloud_node, from: 1.387, to: 1.45)
                 cloud_node.filters = addBloom(intensity: 0.1, radius: 4.0)
             }
-        } else if (sceneName == "cloudy_night") {
+        } else if (sceneName == "cloudy_fog") {
+            opacityDuration = 0.4
+            rootOpacity = 0.2
+            if let cloud_node = view.scene?.rootNode.childNode(withName: "clear_cloud", recursively: true) {
+                scaleAnimation(node: cloud_node, from: 1.387, to: 1.45)
+                cloud_node.filters = addBloom(intensity: 1, radius: 10.0)
+            }
+        }
+        else if (sceneName == "cloudy_night") {
             opacityDuration = 0.4
             for elt in ["stars_001", "stars_002", "stars_003", "stars_004"] {
                 if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
@@ -155,6 +163,23 @@ struct CustomSceneView: UIViewRepresentable {
                 sun_node.opacity = 0.8
                 sun_node.filters = addBloom(intensity: 0.3, radius: 5.0)
                 scaleAnimation(node: sun_node, from: 1.194, to: 1.3)
+            }
+        } else if (sceneName == "solo_snow") {
+            if let solo_snow = view.scene?.rootNode.childNode(withName: "snowfall_001", recursively: true) {
+                solo_snow.scale.x = 0.55
+                solo_snow.scale.y = 0.55
+                solo_snow.scale.z = 0.55
+                rotationAnimation(node: solo_snow)
+                scaleAnimation(node: solo_snow, from: 0.5, to: 0.55)
+            }
+        } else if (sceneName == "light_rain") {
+            for elt in ["raindrop_1", "raindrop_2", "raindrop_3", "raindrop_4"] {
+                if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
+//                    let nb = Int(elt.suffix(1))!
+                    node.filters = addBloom(intensity: 0.2, radius: 5.0)
+                    rainfallAnimation(node: node)
+//                    starAnimation(node: node, direction: false)
+                }
             }
         }
         else {}
@@ -181,7 +206,7 @@ struct CustomSceneView: UIViewRepresentable {
         node.runAction(repeatAction)
     }
     
-    private func moonAnimation(node: SCNNode) {
+    private func rotationAnimation(node: SCNNode) {
         let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: 1), duration: 4)
         startAction.timingMode = .linear
         let sequenceAction = SCNAction.sequence([startAction])
@@ -194,6 +219,24 @@ struct CustomSceneView: UIViewRepresentable {
         let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: direction ? 1 : -1), duration: 0.5)
         startAction.timingMode = .linear
         let sequenceAction = SCNAction.sequence([startAction])
+        let repeatAction = SCNAction.repeatForever(sequenceAction)
+        node.runAction(repeatAction)
+    }
+    
+    private func rainfallAnimation(node: SCNNode) {
+        let startAction = SCNAction.move(by: SCNVector3(-0.05, 0, -0.25), duration: Double.random(in: 1.5..<2.5))
+        let disappearAction = SCNAction.fadeOut(duration: Double.random(in: 1.5..<2.5))
+        startAction.timingMode = .linear
+        
+//        let restart
+        
+        let appearAction = SCNAction.fadeIn(duration: 0)
+        let topRaindrop = SCNAction.move(to: SCNVector3(node.position.x, node.position.y, node.position.z), duration: 0)
+        
+        let dropAnimation = SCNAction.group([startAction, disappearAction])
+        let restartAnim = SCNAction.group([appearAction, topRaindrop])
+        
+        let sequenceAction = SCNAction.sequence([dropAnimation, restartAnim])
         let repeatAction = SCNAction.repeatForever(sequenceAction)
         node.runAction(repeatAction)
     }
@@ -213,6 +256,7 @@ struct CustomSceneView: UIViewRepresentable {
         let repeatAction = SCNAction.repeatForever(sequence)
         node.runAction(repeatAction)
     }
+    
     
     func addBloom(intensity: Double?, radius: Double?) -> [CIFilter]? {
         let bloomFilter = CIFilter(name:"CIBloom")!
@@ -241,7 +285,7 @@ struct CustomSceneView: UIViewRepresentable {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
                 "is_day": 1,
-                "weather_code": 2,
+                "weather_code": 51,
                 "wind_speed_10m": 18.9
             },
             "hourly": {
