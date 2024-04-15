@@ -12,7 +12,7 @@ struct WeatherMap {
     static let data: [String: WeatherInfo] = [
         "0": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
     
-        "1": WeatherInfo(dayDescription: "Mainly Sunny", nightDescription: "Mainly Clear", dayModel: "sunny", nightModel: "cloudy_night", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.1), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "1": WeatherInfo(dayDescription: "Mainly Sunny", nightDescription: "Mainly Clear", dayModel: "sunny", nightModel: "clear_moon", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
         "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.blue, .blue.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
@@ -118,12 +118,13 @@ struct CustomSceneView: UIViewRepresentable {
             }
         } else if (sceneName == "clear_moon") {
             let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.0)
-            if let node = view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true) {
-                node.scale.x = 0.12
-                node.scale.y = 0.12
-                node.scale.z = 0.12
-                node.filters = addBloom(intensity: nil, radius: nil)
-                moonAnimation(node: node)
+            if let moon_node = view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true) {
+                moon_node.scale.x = 0.12
+                moon_node.scale.y = 0.12
+                moon_node.scale.z = 0.12
+//                print("HEREE")
+                moon_node.filters = addBloom(intensity: 0.5, radius: 7.0)
+                moonAnimation(node: moon_node)
             }
             view.scene?.rootNode.runAction(fadeInAction)
         }
@@ -133,11 +134,11 @@ struct CustomSceneView: UIViewRepresentable {
         }
     
         
-        for model in toBloomModel {
-            view.scene?.rootNode.childNode(withName: model, recursively: true)?.filters = addBloom(intensity: 0.1, radius: 6.0)
-        }
+//        for model in toBloomModel {
+//            view.scene?.rootNode.childNode(withName: model, recursively: true)?.filters = addBloom(intensity: 0.1, radius: 6.0)
+//        }
         
-        view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true)?.filters = addBloom(intensity: nil, radius: nil)
+//        view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true)?.filters = addBloom(intensity: nil, radius: nil)
         
         return view
         
@@ -158,7 +159,7 @@ struct CustomSceneView: UIViewRepresentable {
     }
     
     private func moonAnimation(node: SCNNode) {
-        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: 1), duration: 3)
+        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: 1), duration: 4)
         startAction.timingMode = .linear
         let sequenceAction = SCNAction.sequence([startAction])
         let repeatAction = SCNAction.repeatForever(sequenceAction)
