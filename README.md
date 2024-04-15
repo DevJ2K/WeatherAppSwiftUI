@@ -30,4 +30,5 @@ This is a friendly weather application made with SwiftUI and using SceneKit to a
 
 ## Next features
 - Widgets for home and lock screen
+- Adding more 3D models and animations
 - Notification to prevent the sunrise and sunset
