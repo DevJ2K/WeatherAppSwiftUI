@@ -5,16 +5,16 @@ This is a friendly weather application made with SwiftUI and using SceneKit to a
 
 ### - Home
 <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-  <img src="/gitimages/IMG_3050.PNG" width="33%">
-  <img src="/gitimages/IMG_3035.PNG" width="33%">
-  <img src="/gitimages/IMG_3036.PNG" width="33%">
+  <img src="/gitimages/IMG_3050.PNG" width="25%">
+  <img src="/gitimages/IMG_3035.PNG" width="25%">
+  <img src="/gitimages/IMG_3036.PNG" width="25%">
 </div>
 
 ### - Tabs
 <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-  <img src="/gitimages/IMG_3034.PNG" width="33%">
-  <img src="/gitimages/IMG_3037.PNG" width="33%">
-  <img src="/gitimages/IMG_3038.PNG" width="33%">
+  <img src="/gitimages/IMG_3034.PNG" width="25%">
+  <img src="/gitimages/IMG_3037.PNG" width="25%">
+  <img src="/gitimages/IMG_3038.PNG" width="25%">
 </div>
 
 ## Features
