@@ -8,6 +8,73 @@
 import SwiftUI
 import SceneKit
 
+struct WeatherMap {
+    static let data: [String: WeatherInfo] = [
+        "0": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+    
+        "1": WeatherInfo(dayDescription: "Mainly Sunny", nightDescription: "Mainly Clear", dayModel: "sunny", nightModel: "cloudy_night", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.1), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.blue, .blue.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "3": WeatherInfo(dayDescription: "Cloudy", nightDescription: "Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "45":  WeatherInfo(dayDescription: "Foggy", nightDescription: "Foggy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "48": WeatherInfo(dayDescription: "Rime Fog", nightDescription: "Rime Fog", dayModel: "thunder_cloud", nightModel: "thunder_cloud", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "51": WeatherInfo(dayDescription: "Light Drizzle", nightDescription: "Light Drizzle", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "53": WeatherInfo(dayDescription: "Drizzle", nightDescription: "Drizzle", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.gray, .gray.opacity(0.5)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "55": WeatherInfo(dayDescription: "Heavy Drizzle", nightDescription: "Heavy Drizzle", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.gray.opacity(0.3), .gray.opacity(0.1)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "56": WeatherInfo(dayDescription: "Light Freezing Drizzle", nightDescription: "Light Freezing Drizzle", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "57": WeatherInfo(dayDescription: "Freezing Drizzle", nightDescription: "Freezing Drizzle", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "61": WeatherInfo(dayDescription: "Light Rain", nightDescription: "Light Rain", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+        "63": WeatherInfo(dayDescription: "Rain", nightDescription: "Rain", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "65": WeatherInfo(dayDescription: "Heavy Rain", nightDescription: "Heavy Rain", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "66": WeatherInfo(dayDescription: "Light Freezing Rain", nightDescription: "Light Freezing Rain", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "67": WeatherInfo(dayDescription: "Freezing Rain", nightDescription: "Freezing Rain", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "71": WeatherInfo(dayDescription: "Light Snow", nightDescription: "Light Snow", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "73": WeatherInfo(dayDescription: "Snow", nightDescription: "Snow", dayModel: "heavy_snow", nightModel: "heavy_snow", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "75": WeatherInfo(dayDescription: "Heavy Snow", nightDescription: "Heavy Snow", dayModel: "heavy_snow", nightModel: "heavy_snow", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+             
+        "77": WeatherInfo(dayDescription: "Snow Grains", nightDescription: "Snow Grains", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+ 
+        
+        "80": WeatherInfo(dayDescription: "Light Showers", nightDescription: "Light Showers", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.indigo.opacity(0.8), .indigo.opacity(0.4)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+                    
+        "81": WeatherInfo(dayDescription: "Showers", nightDescription: "Showers", dayModel: "light_rain", nightModel: "light_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+                    
+        "82": WeatherInfo(dayDescription: "Heavy Showers", nightDescription: "Heavy Showers", dayModel: "heavy_rain", nightModel: "heavy_rain", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+                    
+        "85": WeatherInfo(dayDescription: "Light Snow Showers", nightDescription: "Light Snow Showers", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+                    
+        "86": WeatherInfo(dayDescription: "Snow Showers", nightDescription: "Snow Showers", dayModel: "snowfall", nightModel: "snowfall", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+                    
+        "95": WeatherInfo(dayDescription: "Thunderstorm", nightDescription: "Thunderstorm", dayModel: "light_thunderstorm", nightModel: "light_thunderstorm", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+                         
+        "96": WeatherInfo(dayDescription: "Light Thunderstorms With Hail", nightDescription: "Light Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        
+                         
+        "99": WeatherInfo(dayDescription: "Light Thunderstorms With Hail", nightDescription: "Light Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+    ]
+}
+
 struct CustomSceneView: UIViewRepresentable {
 //    @Binding var scene: SCNScene?
     let sceneName: String
@@ -49,7 +116,18 @@ struct CustomSceneView: UIViewRepresentable {
                 sun.filters = addBloom(intensity: nil, radius: nil)
                 scaleAnimation(node: sun, from: 1.05, to: 1.1)
             }
-        } else {
+        } else if (sceneName == "clear_moon") {
+            let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.0)
+            if let node = view.scene?.rootNode.childNode(withName: "crescent_moon", recursively: true) {
+                node.scale.x = 0.12
+                node.scale.y = 0.12
+                node.scale.z = 0.12
+                node.filters = addBloom(intensity: nil, radius: nil)
+                moonAnimation(node: node)
+            }
+            view.scene?.rootNode.runAction(fadeInAction)
+        }
+        else {
             let fadeInAction = SCNAction.fadeOpacity(by: 1.0, duration: 1.0)
             view.scene?.rootNode.runAction(fadeInAction)
         }
@@ -77,6 +155,15 @@ struct CustomSceneView: UIViewRepresentable {
         let disappearAndReverseScale = SCNAction.sequence([scaleAction, reverseScaleAction])
         let repeatAction = SCNAction.repeatForever(disappearAndReverseScale)
         node.runAction(repeatAction)
+    }
+    
+    private func moonAnimation(node: SCNNode) {
+        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: 1), duration: 3)
+        startAction.timingMode = .linear
+        let sequenceAction = SCNAction.sequence([startAction])
+        let repeatAction = SCNAction.repeatForever(sequenceAction)
+        node.runAction(repeatAction)
+
     }
     
     private func startLoopAnimation(_ node: SCNNode) {
@@ -121,8 +208,8 @@ struct CustomSceneView: UIViewRepresentable {
             "current": {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
-                "is_day": 1,
-                "weather_code": 1,
+                "is_day": 0,
+                "weather_code": 0,
                 "wind_speed_10m": 18.9
             },
             "hourly": {

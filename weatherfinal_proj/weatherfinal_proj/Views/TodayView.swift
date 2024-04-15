@@ -72,7 +72,7 @@ struct TodayView: View {
         guard let sunriseHour = Int(sunriseTime.suffix(5).prefix(2)) else { return false }
         guard let currentHourInt = Int(currentHour) else { return false }
         
-        print("\(currentHour) - \(sunriseHour) - \(sunsetHour)")
+//        print("\(currentHour) - \(sunriseHour) - \(sunsetHour)")
         if (currentHourInt <= sunriseHour || sunsetHour < currentHourInt) {
             return true
         }
