@@ -228,8 +228,6 @@ struct CustomSceneView: UIViewRepresentable {
         let disappearAction = SCNAction.fadeOut(duration: Double.random(in: 1.5..<2.5))
         startAction.timingMode = .linear
         
-//        let restart
-        
         let appearAction = SCNAction.fadeIn(duration: 0)
         let topRaindrop = SCNAction.move(to: SCNVector3(node.position.x, node.position.y, node.position.z), duration: 0)
         
