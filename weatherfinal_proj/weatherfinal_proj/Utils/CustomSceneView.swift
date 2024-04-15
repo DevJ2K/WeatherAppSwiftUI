@@ -12,8 +12,6 @@ struct CustomSceneView: UIViewRepresentable {
 //    @Binding var scene: SCNScene?
     let sceneName: String
     
-    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"]
-    
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
 //        print("MODEL : \(sceneName)")
@@ -41,7 +39,7 @@ struct CustomSceneView: UIViewRepresentable {
             rootOpacity = 0.1
             let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 0.5)
             view.scene?.rootNode.runAction(fadeInAction)
-            for elt in sunshine {
+            for elt in ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"] {
                 if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
                     node.filters = addBloom(intensity: 0.2, radius: 5.0)
                     scaleAnimation(node: node, from: 1.0, to: 0.8)

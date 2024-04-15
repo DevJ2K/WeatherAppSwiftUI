@@ -95,7 +95,7 @@ struct CurrentInfoDash: View {
 }
 
 #Preview {
-    return ContentView()
+//    return ContentView()
     VStack {
         CurrentInfoDash(wind_speed: 18.9, humidity: 43, precipitation_probability: 74)
         CurrentInfoDash()
