@@ -69,10 +69,10 @@ struct WeatherMap {
         "95": WeatherInfo(dayDescription: "Thunderstorm", nightDescription: "Thunderstorm", dayModel: "thunderstorm", nightModel: "thunderstorm", colorDay: [.gray.opacity(0.2), .gray.opacity(0.3)], colorNight: [.black.opacity(0.1), .gray.opacity(0.15)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
                          
-        "96": WeatherInfo(dayDescription: "Light Thunderstorms With Hail", nightDescription: "Light Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "96": WeatherInfo(dayDescription: "Light Thunderstorms With Hail", nightDescription: "Light Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", colorDay: [.gray.opacity(0.2), .gray.opacity(0.2)], colorNight: [.black.opacity(0.1), .gray.opacity(0.15)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
                          
-        "99": WeatherInfo(dayDescription: "Thunderstorms With Hail", nightDescription: "Thunderstorms With Hail", dayModel: "thunderstorm_with_hail", nightModel: "thunderstorm_with_hail", colorDay: [.yellow, .orange], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "99": WeatherInfo(dayDescription: "Thunderstorms With Hail", nightDescription: "Thunderstorms With Hail", dayModel: "big_thunderstorm_with_hail", nightModel: "big_thunderstorm_with_hail", colorDay: [.gray.opacity(0.15), .gray.opacity(0.15)], colorNight: [.black.opacity(0.1), .gray.opacity(0.10)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
     ]
 }
 
@@ -235,6 +235,37 @@ struct CustomSceneView: UIViewRepresentable {
                 lightning.filters = addBloom(intensity: 0.3, radius: 5.0)
                 scaleAnimation(node: lightning, from: 0.036, to: 0.040)
             }
+        } else if (sceneName == "thunderstorm_with_hail") {
+//            Lightning_003
+            if let lightning = view.scene?.rootNode.childNode(withName: "Lightning_002", recursively: true) {
+                lightning.opacity = 0.8
+                lightning.filters = addBloom(intensity: 0.3, radius: 5.0)
+                scaleAnimation(node: lightning, from: 0.024, to: 0.030)
+            }
+            for elt in ["raindrop_1_002", "raindrop_2_002", "raindrop_3_002", "raindrop_4_002"] {
+                if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
+//                    let nb = Int(elt.suffix(1))!
+                    node.filters = addBloom(intensity: 0.2, radius: 3.0)
+                    rainfallAnimation(node: node, speedIntervals: [1.5, 2.5])
+//                    starAnimation(node: node, direction: false)
+                }
+            }
+        } else if (sceneName == "big_thunderstorm_with_hail") {
+//            Lightning_003
+            if let lightning = view.scene?.rootNode.childNode(withName: "Lightning_002", recursively: true) {
+                lightning.opacity = 0.8
+                lightning.filters = addBloom(intensity: 0.3, radius: 5.0)
+                scaleAnimation(node: lightning, from: 0.024, to: 0.030)
+            }
+            for elt in ["raindrop_1_003", "raindrop_2_003", "raindrop_3_003", "raindrop_4_003","raindrop_1_002", "raindrop_2_002", "raindrop_3_002", "raindrop_4_002"] {
+                if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
+//                    let nb = Int(elt.suffix(1))!
+                    node.opacity = 0.1
+                    node.filters = addBloom(intensity: 0.1, radius: 2.0)
+                    rainfallAnimation(node: node, speedIntervals: [0.5, 1.0])
+//                    starAnimation(node: node, direction: false)
+                }
+            }
         }
         else {}
     
@@ -353,7 +384,7 @@ struct CustomSceneView: UIViewRepresentable {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
                 "is_day": 0,
-                "weather_code": 95,
+                "weather_code": 99,
                 "wind_speed_10m": 18.9
             },
             "hourly": {
