@@ -124,7 +124,7 @@ struct MyAppBar: View {
 //}
 
 #Preview {
-    return ContentView()
+//    return ContentView()
     VStack {
         Spacer()
         MyAppBar(selectedTab: .constant(.currently))
