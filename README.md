@@ -1,11 +1,15 @@
 # Weather42
 
-## Current features
-- Fetch weather with the open-meteo API
-- Search cities
+## Preview
+
+<div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+  <img src="/gitimages/IMG_3034.PNG" width="20%">
+  <img src="/gitimages/IMG_3035.PNG" width="20%">
+  <img src="/gitimages/IMG_3036.PNG" width="20%">
+</div>
+
+## Features
+- 
 
 ## Next features
-- Launch Screen
-- Loading when fetching some stuff
-- Remove print in console
-- 3D Models to see the weather
+- 
