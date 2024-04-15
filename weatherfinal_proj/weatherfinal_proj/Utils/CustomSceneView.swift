@@ -14,9 +14,9 @@ struct WeatherMap {
     
         "1": WeatherInfo(dayDescription: "Mainly Sunny", nightDescription: "Mainly Clear", dayModel: "sunny", nightModel: "clear_moon", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.1627, green: 0.7392, blue: 1.0)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "2": WeatherInfo(dayDescription: "Partly Cloudy", nightDescription: "Partly Cloudy", dayModel: "partly_cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.3, green: 0.35, blue: 1.0)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
-        "3": WeatherInfo(dayDescription: "Cloudy", nightDescription: "Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
+        "3": WeatherInfo(dayDescription: "Cloudy", nightDescription: "Cloudy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.cyan, Color(red: 0.1627, green: 0.7392, blue: 1.0)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .blue, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
         "45":  WeatherInfo(dayDescription: "Foggy", nightDescription: "Foggy", dayModel: "cloudy", nightModel: "cloudy_night", colorDay: [.gray, .gray.opacity(0.7)], colorNight: [.indigo.opacity(0.7), .blue], graphDayColor: .gray, graphNightColor: .indigo, dayOpacity: 0.5, nightOpacity: 0.3),
         
@@ -139,10 +139,8 @@ struct CustomSceneView: UIViewRepresentable {
             for elt in ["stars_001", "stars_002", "stars_003", "stars_004"] {
                 if let node = view.scene?.rootNode.childNode(withName: elt, recursively: true) {
                     let nb = Int(elt.suffix(1))!
-                    
                     node.filters = addBloom(intensity: 0.2, radius: 5.0)
                     starAnimation(node: node, direction: ((nb % 2) != 0))
-//                    scaleAnimation(node: node, from: 1.0, to: 0.8)
                 }
             }
             if let moon_node = view.scene?.rootNode.childNode(withName: "moon_night", recursively: true) {
@@ -151,6 +149,12 @@ struct CustomSceneView: UIViewRepresentable {
             if let cloud_node = view.scene?.rootNode.childNode(withName: "night_cloud", recursively: true) {
                 scaleAnimation(node: cloud_node, from: 0.965, to: 1.0)
                 cloud_node.filters = addBloom(intensity: 0.1, radius: 5.0)
+            }
+        } else if (sceneName == "partly_cloudy") {
+            if let sun_node = view.scene?.rootNode.childNode(withName: "clean_sun", recursively: true) {
+                sun_node.opacity = 0.8
+                sun_node.filters = addBloom(intensity: 0.3, radius: 5.0)
+                scaleAnimation(node: sun_node, from: 1.194, to: 1.3)
             }
         }
         else {}
@@ -236,7 +240,7 @@ struct CustomSceneView: UIViewRepresentable {
             "current": {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
-                "is_day": 0,
+                "is_day": 1,
                 "weather_code": 2,
                 "wind_speed_10m": 18.9
             },
