@@ -69,7 +69,7 @@ struct TodayView: View {
         guard let currentHourInt = Int(currentHour) else { return false }
         
         print("\(currentHour) - \(sunriseHour) - \(sunsetHour)")
-        if (currentHourInt <= sunriseHour || sunsetHour <= currentHourInt) {
+        if (currentHourInt <= sunriseHour || sunsetHour < currentHourInt) {
             return true
         }
         return false
@@ -84,7 +84,7 @@ struct TodayView: View {
                     ForEach(0 ..< min(24, cityInfo!.hourly!.time.count), id: \.self) { i in
                         let currentHour = getCurrentHour(timezone: cityInfo!.city?.timezone)
                         let i_hour = cityInfo!.hourly!.time[i].suffix(5).prefix(2)
-                        Group {
+                        HStack {
                             VStack(spacing: 12) {
                                 if (currentHour == i_hour) {
                                     Text("Now")
@@ -105,32 +105,52 @@ struct TodayView: View {
                                     HStack(spacing: 4) {
                                         Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
                                             .font(.system(size: 14))
-                                            .opacity(0.8)
+//                                            .opacity(0.8)
                                         Text("\(String(format: "%.1f", cityInfo!.hourly!.temperature_2m[i]))°")
                                             .font(.system(size: 14, weight: .bold))
-                                            .opacity(0.8)
+//                                            .opacity(0.8)
                                     }
                                     HStack(spacing: 4) {
                                         Image(systemName: "wind")
                                             .font(.system(size: 14))
-                                            .opacity(0.8)
+//                                            .opacity(0.8)
                                         Text("\(String(format: "%.1f", cityInfo!.hourly!.wind_speed_10m[i]))km/h")
                                             .font(.system(size: 14, weight: .light))
-                                            .opacity(0.8)
+//                                            .opacity(0.8)
                                     }
                                 }
                             }
                             .padding()
-//                            if (isSunriseHour(currentHour: i_hour, sunriseTime: cityInfo?.hourly?.sunrise)) {
-//                                                            Text("Yo")
-//                                                        }
+//                            cityInfo?.hourly?.sunrise
+                            if (isSunriseHour(currentHour: String(i_hour), sunriseTime: cityInfo?.hourly?.sunrise)) {
+                                VStack(spacing: 12) {
+                                        Text("\(cityInfo!.hourly!.sunrise!.suffix(5))")
+                                            .font(.system(size: 14, weight: .bold))
+                                        Image(systemName: "sunrise.fill")
+                                            .foregroundStyle(.white, .orange)
+                                            .font(.system(size: 28))
+                                            .frame(height: 40)
+                                        Text("Sunrise")
+                                            .font(.system(size: 18, weight: .semibold))
+                                            .frame(height: 40)
+                                }
+                                .padding()
+                            }
+                            if (isSunsetHour(currentHour: String(i_hour), sunsetTime: cityInfo?.hourly?.sunset)) {
+                                VStack(spacing: 12) {
+                                        Text("\(cityInfo!.hourly!.sunset!.suffix(5))")
+                                            .font(.system(size: 14, weight: .bold))
+                                        Image(systemName: "sunset.fill")
+                                            .foregroundStyle(.white, .orange)
+                                            .font(.system(size: 28))
+                                            .frame(height: 40)
+                                        Text("Sunset")
+                                            .font(.system(size: 18, weight: .semibold))   
+                                            .frame(height: 40)
+                                }
+                                .padding()
+                            }
                         }
-//                        Group {
-//                            
-//                            if (isSunriseHour(currentHour: i_hour, sunriseTime: cityInfo?.hourly?.sunrise)) {
-//                                Text("Yo")
-//                            }
-//                        }
                     }
                 }
             }
@@ -142,7 +162,7 @@ struct TodayView: View {
 }
 
 #Preview {
-//    return ContentView()
+    //    return ContentView()
     let jsonString = """
         {
             "city": {
