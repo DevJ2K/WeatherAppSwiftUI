@@ -1,17 +1,17 @@
-# Weather42
-This is a friendly weather application made with SwiftUI and using SceneKit to add some cool 3D models.
+<h1 align="center">Weather42</h1>
+<p align="center">This is a friendly weather application made with SwiftUI and using SceneKit to add some cool 3D models.</p>
 
-## Preview
+<h2 align="center">Preview</h2>
 
-### - Home
-<div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+<h3 align="center">Home</h3>
+<div align="center" style="width: 100%; display: flex;">
   <img src="/gitimages/IMG_3050.PNG" width="25%">
   <img src="/gitimages/IMG_3035.PNG" width="25%">
   <img src="/gitimages/IMG_3036.PNG" width="25%">
 </div>
 
-### - Tabs
-<div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+<h3 align="center">Tabs</h3>
+<div align="center" style="width: 100%; display: flex; justify-content: center; align-items: center;">
   <img src="/gitimages/IMG_3034.PNG" width="25%">
   <img src="/gitimages/IMG_3037.PNG" width="25%">
   <img src="/gitimages/IMG_3038.PNG" width="25%">
@@ -31,4 +31,4 @@ This is a friendly weather application made with SwiftUI and using SceneKit to a
 ## Next features
 - Widgets for home and lock screen
 - Adding more 3D models and animations
-- Notification to prevent the sunrise and sunset
+- Tabs with an historic list of the previous search
