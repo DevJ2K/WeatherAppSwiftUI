@@ -17,6 +17,13 @@
   <img src="/gitimages/IMG_3038.PNG" width="25%">
 </div>
 
+<h3 align="center">Some animations</h3>
+<div align="center" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+  <img src="/gitimages/gif1.gif" width="25%">
+  <img src="/gitimages/gif2.gif" width="25%">
+  <img src="/gitimages/gif3.gif" width="25%">
+</div>
+
 ## Features
 - 3D models with some animations using SceneKit to preview the weather
 - Background color changing depending of the weather
