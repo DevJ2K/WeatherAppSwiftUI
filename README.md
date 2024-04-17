@@ -1,4 +1,4 @@
-<h1 align="center">Weather42</h1>
+<h1 align="center">Weather3D</h1>
 <p align="center">This is a friendly weather application made with SwiftUI and using SceneKit to add some cool 3D models.</p>
 
 <h2 align="center">Preview</h2>
